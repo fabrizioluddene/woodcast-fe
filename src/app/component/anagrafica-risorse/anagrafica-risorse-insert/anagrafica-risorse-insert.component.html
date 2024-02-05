@@ -1,0 +1,45 @@
+<h1 class="page-title inserimento-modal-title"><span class="flex-display"><mat-icon>person</mat-icon> Inserisci Risorsa</span></h1>
+
+
+
+
+<form [formGroup]="form" (ngSubmit)="sub()">
+    <div mat-dialog-content>
+
+        <mat-form-field>
+            <mat-label>Nominativo</mat-label>
+            <input matInput placeholder="inserisci un valore" #input formControlName="nominative">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Societ&aacute;</mat-label>
+            <input matInput placeholder="inserisci un valore" #input formControlName="company">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Area</mat-label>
+            <input matInput placeholder="inserisci un valore" #input formControlName="area">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Rate</mat-label>
+            <mat-select formControlName="grade">
+                
+                <span *ngFor="let customerRateParam of customerRateParams; let i = index">
+                    <mat-option value="{{customerRateParam.grade}}">{{customerRateParam.grade}} - {{customerRateParam.rate}}</mat-option>
+                </span>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Matricola</mat-label>
+            <input matInput placeholder="inserisci un valore" #input formControlName="number">
+        </mat-form-field>
+
+    </div>
+    <div mat-dialog-actions align="end">
+
+        <button type="submit" mat-flat-button color="accent">
+            <mat-icon>save</mat-icon>
+            SALVA
+        </button>
+
+    </div>
+</form>

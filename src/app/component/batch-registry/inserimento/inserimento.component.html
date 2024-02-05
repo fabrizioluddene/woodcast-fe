@@ -1,0 +1,70 @@
+<h1 class="page-title flex-display inserimento-modal-title"><span class=" flex-display "><mat-icon>extension</mat-icon> Inserisci Commessa</span></h1>
+<form [formGroup]="form" (ngSubmit)="sub()">
+    <div mat-dialog-content>
+        <mat-form-field>
+            <mat-label>Servizio</mat-label>
+            <mat-select formControlName="idCustomerService">
+                <span *ngFor="let customerServiceModel of customerServiceModels; let i = index">
+                    <mat-option value="{{customerServiceModel.id}}">{{customerServiceModel.name}} -
+                        {{customerServiceModel.rate}}</mat-option>
+                </span>
+            </mat-select>
+
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Commessa</mat-label>
+            <input matInput placeholder="inserisci un valore" #input formControlName="order">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Descrizione</mat-label>
+            <input matInput placeholder="inserisci un valore" #input formControlName="description">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Program Manager</mat-label>
+            <input matInput placeholder="inserisci un valore" #input formControlName="pm">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Tipo Commessa</mat-label>
+            <mat-select formControlName="orderType">
+                <mat-option value="R">Ricavo</mat-option>
+                <mat-option value="A">Altro</mat-option>
+
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Stato Lotto</mat-label>
+            <mat-select formControlName="orderStatus">
+                <mat-option value="A">Aperto</mat-option>
+                <mat-option value="C">Chiuso</mat-option>
+
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Ricavo</mat-label>
+            <input matInput placeholder="inserisci un valore" #input formControlName="proceeds">
+            <mat-icon matSuffix>euro</mat-icon>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Margine</mat-label>
+            <input matInput placeholder="inserisci un valore" #input formControlName="expectedMargin">
+        </mat-form-field>
+
+        
+        <mat-form-field>
+            <mat-label>Plafond GG ricavo</mat-label>
+            <input matInput placeholder="inserisci un valore" #input formControlName="proceedsDayPlafond">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Note</mat-label>
+            <textarea matInput placeholder="inserisci un valore" #input formControlName="note"></textarea>
+        </mat-form-field>
+        <div mat-dialog-actions align="end">
+
+            <button type="submit" mat-flat-button color="accent">
+                <mat-icon>save</mat-icon>
+                SALVA
+            </button>
+
+        </div>
+    </div>
+</form>

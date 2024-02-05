@@ -1,0 +1,20 @@
+
+    <h1 class="inserimento-modal-title"><span class="flex-display"><mat-icon>account_balance</mat-icon> Inserisci Cliente</span></h1>
+
+    <form [formGroup]="form" (ngSubmit)="sub()">
+        <div mat-dialog-content>
+            <mat-form-field>
+                <mat-label>Cliente</mat-label>
+                <input matInput placeholder="inserisci un valore" #input formControlName="customerName">
+            </mat-form-field>
+            <div mat-dialog-actions align="end">
+
+                <button type="submit" mat-flat-button color="accent">
+                    <mat-icon>save</mat-icon>
+                    SALVA
+                </button>
+
+            </div>
+
+        </div>
+    </form>

@@ -1,0 +1,200 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 0;
+    height: 100%;
+    background-color: var(--mat-sidenav-content-background-color);
+}
+
+.mat-drawer-container {
+    background-color: var(--mat-sidenav-content-background-color);
+}
+
+.plus-botton-container {
+    position: fixed;
+    right: 35px;
+    top: 90%;
+}
+
+.container {
+    width: 95%;
+    margin: 32px auto 0 auto;
+}
+
+
+
+.mat-toolbar-row, .mat-toolbar-single-row{
+    background-color: #3f51b5!important;
+    
+    color: #fff!important;
+}
+
+
+.field-title {
+    background-color: #3f51b5;;
+    display: inline-block;
+    color: #fff;
+    padding: 10px;
+    margin-right: 32px;
+    border-radius: 100px;
+    
+}
+
+.mat-mdc-form-field {
+    display: block !important;
+}
+
+.form-filed-container {
+    position: fixed;
+    z-index: 9999;
+    background-color: #fff;
+    width: 500px;
+    left: -250px;
+    top: 50px;
+    margin-left: 50%;
+    border-radius: 16px;
+    -webkit-box-shadow: 5px 5px 10px 0px #999898;
+    -moz-box-shadow: 5px 5px 10px 0px #999898;
+    -o-box-shadow: 5px 5px 10px 0px #999898;
+    box-shadow: 5px 5px 25px 0px #999898;
+    display: none;
+
+}
+
+.form-filed-body {
+    width: 90%;
+    margin: auto
+}
+
+.form-filed-header {
+    width: 90%;
+    margin: auto;
+    padding-top: 16px;
+    color:  #3f51b5;
+}
+.form-filed-footer{
+    padding: 8px;
+    text-align: right;
+}
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  app-customer-dropdown  {
+    color: #ff4081!important;
+  }
+
+  .inserimento-modal-title{
+    color: #ff4081; 
+    margin: 25px 25px 0 25px!important;
+  }
+  .flex-display mat-icon{
+    
+    line-height: 31px!important;
+  }
+
+  .page-title{
+    color: #ff4081; 
+  }
+  .mat-mdc-header-row {
+    background: #3f51b5!important;
+    color:  #fff!important;
+}
+.example-sidenav {
+    background: #3f51b5!important;
+    color:  #fff!important;
+    padding: 16px;
+    box-shadow: 0 16px 38px -12px rgba(0,0,0,.56),0 4px 25px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(0,0,0,.2)!important;
+}
+.example-sidenav .mdc-list-item__primary-text {
+    color: #fff!important;
+}
+.mdc-list-item__primary-text:hover{
+    color: #ff4081!important;
+    cursor: pointer;
+}
+.mat-sort-header-arrow, [dir=rtl] .mat-sort-header-position-before .mat-sort-header-arrow{
+    color: #ff4081!important;
+}
+.container{
+    height: 100%;
+}
+
+.mat-mdc-row:nth-child(even){
+    background-color: #fff;
+}
+        
+.mat-mdc-row:nth-child(odd){
+    background-color: #fffafa;
+}
+mat-drawer-container{
+    height: 100%;
+}
+.coll-45{
+    width: 45%;
+    
+}
+.coll-10{
+    width: 10%;
+}
+.float-left{
+    float: left;
+}
+.row::after{
+    content: " ";
+    display: block;
+    clear: both;
+}
+.mat-mdc-header-cell .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background{
+    border-color:#fff!important;
+}
+.mat-mdc-row, .mdc-data-table__content {
+    font-size: 12px!important;
+}
+tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row.ng-star-inserted {
+    font-size: 12px!important;
+}
+
+.mat-elevation-z1::-webkit-scrollbar {
+    height: 10px;
+    overflow-y: scroll;
+    background: var(--mat-sidenav-content-background-color);
+    
+}
+
+.mat-elevation-z1::-webkit-scrollbar-thumb {
+    background: #ff4081;
+    border-radius: 10px;
+ 
+}
+.add-element-res:hover{
+    border-bottom:1px solid #ff4081;
+    text-decoration: underline;
+    color: #ff4081;
+}
+.add-element-res{
+    -webkit-transition: color .5s; /* For Safari 3.0 to 6.0 */
+    transition: border .5s; /* For modern browsers */
+}
+.input-table-field{
+    border: none;
+    width: 30px;
+    cursor: pointer;
+    outline: none;
+   text-align: center;
+    height: 30px;
+}
+.input-table-field:focus{
+    border-bottom: 1px solid #ff4081!important;
+    
+}
+
+
+  
+ 

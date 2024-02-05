@@ -1,0 +1,110 @@
+<h1 class="page-title"><span style="display: flex;line-height: 25px;">
+    <mat-icon mat-list-icon>home</mat-icon>&nbsp;&nbsp;&nbsp;
+        <span style="cursor: pointer;" routerLink="/">Dashboard</span>&nbsp; &gt; &nbsp;
+    <mat-icon mat-list-icon>extension</mat-icon>&nbsp;&nbsp;&nbsp;
+    <span>Anagrafica Lotti</span>
+  </span>
+</h1>
+<mat-form-field>
+    <mat-label>Ricerca</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="inserisci un valore" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z1" style="overflow: auto;">
+    
+    <table [width]="2632" mat-table [dataSource]="dataSource" matSort  matSortActive="order" matSortDisableClear matSortDirection="asc">
+        
+        <ng-container  matColumnDef="order">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 139px;"> Commessa </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{element.order}} </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 255px;"> Descrizione </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{element.description}} </td>
+        </ng-container>
+        <ng-container matColumnDef="pm">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 117px;"> PM </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{element.pm}} </td>
+        </ng-container>
+        <ng-container matColumnDef="orderType">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 80px;"> Tipo  </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{element.orderType}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="orderStatus">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 80px; "> Stato  </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{element.orderStatus}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="proceeds">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 130px;"> Ricavo </th>
+            <td mat-cell *matCellDef="let element" class="left-text" > {{formatCurrency(element.proceeds)}} </td>
+        </ng-container>
+        <ng-container matColumnDef="expectedMargin">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 117px;"> Margine ins. </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{element.expectedMargin}}%</td>
+        </ng-container>
+        <ng-container matColumnDef="expectedMarginEU">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 130px;"> Margine prev. </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{formatCurrency(element.expectedMarginEU)}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="proceedsDayPlafond">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 147px;"> Plafond GG ricavo </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{element.proceedsDayPlafond}} </td>
+        </ng-container>
+        <ng-container matColumnDef="proceedsPlafond" >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 147px;"> Plafond ricavo </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{formatCurrency(element.proceedsPlafond)}} </td>
+        </ng-container>
+        <ng-container matColumnDef="daysRemaining">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 147px;"> GG Rimanenti </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{element.daysRemaining}} </td>
+        </ng-container>
+        <ng-container matColumnDef="proceedsRemaining">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 147px;"> Ricavo Rimanente </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{formatCurrency(element.proceedsRemaining)}} </td>
+        </ng-container>
+        <ng-container matColumnDef="overallCosts">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 147px;"> Costi complessivi </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{formatCurrency(element.overallCosts)}} </td>
+        </ng-container>
+        <ng-container matColumnDef="effectiveCosts">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 147px;"> Costi Effettivi </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{formatCurrency(element.effectiveCosts)}} </td>
+        </ng-container>
+        <ng-container matColumnDef="averageRate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 147px;"> Tariffa media </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{formatCurrency(element.averageRate)}} </td>
+        </ng-container>
+        <ng-container matColumnDef="deltaEffectiveCost">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 147px;"> Delta Costo </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{formatCurrency(element.deltaEffectiveCost)}} </td>
+        </ng-container>
+        <ng-container matColumnDef="totalEffectiveDay">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 147px;"> Totale gg Effettivi </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{element.totalEffectiveDay}} </td>
+        </ng-container>
+        <ng-container matColumnDef="calculateMargin">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 147px;"> Margine Effettivo </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{element.calculateMargin}}% </td>
+        </ng-container>
+        <ng-container matColumnDef="effectiveMUP">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 147px;"> MUP effettivo </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> {{formatCurrency(element.effectiveMUP)}} </td>
+        </ng-container>
+        
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    
+</div>
+<mat-paginator [length]="100" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"></mat-paginator>
+<div class="plus-botton-container">
+    <button (click)="openDialog()" mat-fab color="accent" aria-label="Example icon button with a bookmark icon">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <br/><br/>
