@@ -21,11 +21,10 @@ export class ForecastComponent {
   sort!: MatSort;
 
   @Input() data: any[] = [];
-  displayedColumns: string[] = ["id",
+  originalColumns: string[] = [
     "nominative",
-    "company",
     "area",
-    "number",
+    "batchRegistryName",
     "grade",
     "rate",
     "gennaio",
@@ -36,12 +35,26 @@ export class ForecastComponent {
     "giugno",
     "luglio",
     "agosto",
-    "ottobbre",
     "settembre",
+    "ottobbre",
     "novembre",
     "dicembre"
   ];
-
+  column: any = [
+    { name: "Gennaio", value: "gennaio", color: "accent", icon: "visibility" },
+    { name: "Febbraio", value: "febbraio", color: "accent", icon: "visibility" },
+    { name: "Marzo", value: "marzo", color: "accent", icon: "visibility" },
+    { name: "Aprile", value: "aprile", color: "accent", icon: "visibility" },
+    { name: "Maggio", value: "maggio", color: "accent", icon: "visibility" },
+    { name: "Giugno", value: "giugno", color: "accent", icon: "visibility" },
+    { name: "Luglio", value: "luglio", color: "accent", icon: "visibility" },
+    { name: "Agosto", value: "agosto", color: "accent", icon: "visibility" },
+    { name: "Settembre", value: "settembre", color: "accent", icon: "visibility" },
+    { name: "Ottobbre", value: "ottobbre", color: "accent", icon: "visibility" },
+    { name: "Novembre", value: "novembre", color: "accent", icon: "visibility" },
+    { name: "Dicembre", value: "dicembre", color: "accent", icon: "visibility" },
+  ]
+  displayedColumns: string[] = this.originalColumns.slice();
   dataSource = new MatTableDataSource<IForecastResponse>();
   dataArray: any;
 
@@ -51,8 +64,6 @@ export class ForecastComponent {
   constructor(private forcastService: ForecastService, private sharedDataService: SharedDataService) {
     this.sharedDataService.variable$.subscribe(value => {
       this.custumers = value;
-
-
     });
   }
 
@@ -61,38 +72,49 @@ export class ForecastComponent {
   }
 
   getForecast() {
-  
+
     this.subs.add(this.forcastService.getForecast(this.custumers.id)
       .subscribe((res) => {
-
-       
         this.dataSource = new MatTableDataSource<IForecastResponse>(this.transformForecastResponse(res));
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-    
-
       },
         (err: HttpErrorResponse) => {
           console.log(err);
         }));
-   
+
+  }
+  removeColumn(column: string, index: number) {
+
+    const columnIndex = this.displayedColumns.indexOf(column);
+    if (columnIndex !== -1) {
+      this.displayedColumns.splice(columnIndex, 1); // Rimuovi la colonna se è presente
+    } else {
+      const originalIndex = this.originalColumns.indexOf(column);
+      if (originalIndex !== -1) {
+        this.displayedColumns.splice(originalIndex, 0, column); // Aggiungi la colonna nella posizione originale
+      }
+    }
+    if("visibility" ===this.column[index].icon){
+      this.column[index].icon = "visibility_off";
+      this.column[index].color = "";
+    }else{
+      this.column[index].icon = "visibility";
+      this.column[index].color = "accent";
+    }
+    
+
   }
 
   ngOnInit() {
-   this.getForecast();
-    
-    
-
+    this.getForecast();
   }
 
 
 
   save(elemento: any, inp: any) {
-
-    
-
     console.log(elemento)
-    this.forcastService.save({  calendarId: elemento,  workingDay: inp  }).subscribe(res=>{
+    this.forcastService.save({ calendarId: elemento, workingDay: inp }).subscribe(res => {
       this.getForecast();
     })
 
@@ -100,12 +122,15 @@ export class ForecastComponent {
 
   transformForecastResponse(res: any) {
     var forecastArray = Array<IForecastResponse>();
-    res.forEach((obj: { id: number | null; nominative: string | null; company: string | null; area: string | null; number: string | null; grade: string | null; rate: number | null; pivot: { agosto: { idCalendar: number | null; workingDay: number | null; }; settembre: { idCalendar: number | null; workingDay: number | null; }; ottobbre: { idCalendar: number | null; workingDay: number | null; }; giugno: { idCalendar: number | null; workingDay: number | null; }; gennaio: { idCalendar: number | null; workingDay: number | null; }; febbraio: { idCalendar: number | null; workingDay: number | null; }; luglio: { idCalendar: number | null; workingDay: number | null; }; aprile: { idCalendar: number | null; workingDay: number | null; }; dicembre: { idCalendar: number | null; workingDay: number | null; }; novembre: { idCalendar: number | null; workingDay: number | null; }; maggio: { idCalendar: number | null; workingDay: number | null; }; marzo: { idCalendar: number | null; workingDay: number | null; }; }; }) => {
-      var forecast: IForecastResponse ={
+    res.forEach((obj: {
+      batchRegistryName: string | null; id: number | null; nominative: string | null; company: string | null; area: string | null; number: string | null; grade: string | null; rate: number | null; pivot: { agosto: { idCalendar: number | null; workingDay: number | null; }; settembre: { idCalendar: number | null; workingDay: number | null; }; ottobbre: { idCalendar: number | null; workingDay: number | null; }; giugno: { idCalendar: number | null; workingDay: number | null; }; gennaio: { idCalendar: number | null; workingDay: number | null; }; febbraio: { idCalendar: number | null; workingDay: number | null; }; luglio: { idCalendar: number | null; workingDay: number | null; }; aprile: { idCalendar: number | null; workingDay: number | null; }; dicembre: { idCalendar: number | null; workingDay: number | null; }; novembre: { idCalendar: number | null; workingDay: number | null; }; maggio: { idCalendar: number | null; workingDay: number | null; }; marzo: { idCalendar: number | null; workingDay: number | null; }; };
+    }) => {
+      var forecast: IForecastResponse = {
         id: null,
         nominative: null,
         company: null,
         area: null,
+        batchRegistryName: null,
         number: null,
         grade: null,
         rate: null,
@@ -162,6 +187,7 @@ export class ForecastComponent {
       forecast.nominative = obj.nominative;
       forecast.company = obj.company;
       forecast.area = obj.area;
+      forecast.batchRegistryName = obj.batchRegistryName;
       forecast.number = obj.number;
       forecast.grade = obj.grade;
       forecast.rate = obj.rate;
@@ -191,6 +217,7 @@ export interface IForecastResponse {
   nominative: string | null,
   company: string | null,
   area: string | null,
+  batchRegistryName: string | null,
   number: string | null,
   grade: string | null,
   rate: number | null,
@@ -242,6 +269,4 @@ export interface IForecastResponse {
     idCalendar: number | null,
     workingDay: number | null,
   }
-
-
 }

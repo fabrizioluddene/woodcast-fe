@@ -10,55 +10,58 @@
     <mat-label>Ricerca</mat-label>
     <input matInput placeholder="inserisci un valore" #input>
 </mat-form-field>
+<div style="display: flex; vertical-align: middle;">
+<b style="line-height: 36px;">Visualizza colonne: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button *ngFor="let col of column; let i = index" type="submit" mat-flat-button color="{{col.color}}" (click)="removeColumn(col.value,i)" style="margin: 0px 16px 16px 0">
+    <mat-icon>{{col.icon}}</mat-icon>
+    {{col.name}}
+</button> 
+</div>
+<br/><br/>
 
-<div class="mat-elevation-z1" style="overflow: auto;">
-    <table mat-table  [dataSource]="dataSource" matSort matSortActive="nominative" matSortDisableClear
+<div class="mat-elevation-z1 forecast-table" style="overflow: auto;">
+    <table [width]="1200" mat-table  [dataSource]="dataSource" matSort matSortActive="batchRegistryName" matSortDisableClear
         matSortDirection="asc">
 
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
-            <td mat-cell *matCellDef="let element" class="left-text"> {{element.id}} </td>
-        </ng-container>
+       
 
         <ng-container matColumnDef="nominative">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Nominativo </th>
-            <td mat-cell *matCellDef="let element" class="left-text"> {{element.nominative}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="company">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> company </th>
-            <td mat-cell *matCellDef="let element" class="left-text"> {{element.company}} </td>
+            <td mat-cell *matCellDef="let element" class="left-text" style=" white-space: nowrap;"> {{element.nominative}} </td>
         </ng-container>
 
         <ng-container matColumnDef="area">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> area </th>
-            <td mat-cell *matCellDef="let element" class="left-text"> {{element.area}} </td>
+            <th mat-header-cell *matHeaderCellDef > Ambito </th>
+            <td mat-cell *matCellDef="let element" class="left-text" style=" white-space: nowrap;"> {{element.area}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="number">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> number </th>
-            <td mat-cell *matCellDef="let element" class="left-text"> {{element.number}} </td>
+       
+        <ng-container matColumnDef="batchRegistryName" >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header > WBA </th>
+            <td mat-cell *matCellDef="let element" class="left-text" style=" white-space: nowrap;"> {{element.batchRegistryName}} </td>
         </ng-container>
+
+        
 
         <ng-container matColumnDef="grade">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> grade </th>
+            <th mat-header-cell *matHeaderCellDef> Grade </th>
             <td mat-cell *matCellDef="let element" class="left-text"> {{element.grade}} </td>
         </ng-container>
 
         <ng-container matColumnDef="rate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> rate </th>
+            <th mat-header-cell *matHeaderCellDef > Rate </th>
             <td mat-cell *matCellDef="let element" class="left-text"> {{element.rate}} </td>
         </ng-container>
 
         <ng-container matColumnDef="gennaio">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header  style="width: 500px!important"> gennaio </th>
+            <th mat-header-cell *matHeaderCellDef  > gennaio </th>
             <td mat-cell *matCellDef="let element" class="left-text">
                 <input class="input-table-field" matInput placeholder="inserisci un valore" #input value="{{element.gennaio.workingDay}}" (change)="save(element.gennaio.idCalendar,input.value)">
             </td>
         </ng-container>
 
         <ng-container matColumnDef="febbraio">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 93px;"> febbraio </th>
+            <th mat-header-cell *matHeaderCellDef  style="width: 93px;"> febbraio </th>
             <td mat-cell *matCellDef="let element" class="left-text"> 
                 
                 <input class="input-table-field" matInput placeholder="inserisci un valore" #input value="{{element.febbraio.workingDay}}" (change)="save(element.febbraio.idCalendar,input.value)">
@@ -66,7 +69,7 @@
         </ng-container>
 
         <ng-container matColumnDef="marzo">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 93px;"> marzo </th>
+            <th mat-header-cell *matHeaderCellDef  style="width: 93px;"> marzo </th>
             <td mat-cell *matCellDef="let element" class="left-text"> 
                 
                 <input class="input-table-field" matInput placeholder="inserisci un valore" #input value="{{element.marzo.workingDay}}" (change)="save(element.marzo.idCalendar,input.value)">
@@ -74,7 +77,7 @@
         </ng-container>
 
         <ng-container matColumnDef="aprile">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> aprile </th>
+            <th mat-header-cell *matHeaderCellDef > aprile </th>
             <td mat-cell *matCellDef="let element" class="left-text"> 
                 
                 <input class="input-table-field" matInput placeholder="inserisci un valore" #input value="{{element.aprile.workingDay}}" (change)="save(element.aprile.idCalendar,input.value)">
@@ -82,7 +85,7 @@
         </ng-container>
 
         <ng-container matColumnDef="maggio">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> maggio </th>
+            <th mat-header-cell *matHeaderCellDef > maggio </th>
             <td mat-cell *matCellDef="let element" class="left-text"> 
                 
                 <input class="input-table-field" matInput placeholder="inserisci un valore" #input value="{{element.maggio.workingDay}}" (change)="save(element.maggio.idCalendar,input.value)">
@@ -90,7 +93,7 @@
         </ng-container>
 
         <ng-container matColumnDef="giugno">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> giugno </th>
+            <th mat-header-cell *matHeaderCellDef > giugno </th>
             <td mat-cell *matCellDef="let element" class="left-text"> 
                 
                 <input class="input-table-field" matInput placeholder="inserisci un valore" #input value="{{element.giugno.workingDay}}" (change)="save(element.giugno.idCalendar,input.value)">
@@ -98,7 +101,7 @@
         </ng-container>
 
         <ng-container matColumnDef="luglio">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> luglio </th>
+            <th mat-header-cell *matHeaderCellDef > luglio </th>
             <td mat-cell *matCellDef="let element" class="left-text"> 
                 
                 <input class="input-table-field" matInput placeholder="inserisci un valore" #input value="{{element.luglio.workingDay}}" (change)="save(element.luglio.idCalendar,input.value)">
@@ -106,7 +109,7 @@
         </ng-container>
 
         <ng-container matColumnDef="agosto">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> agosto </th>
+            <th mat-header-cell *matHeaderCellDef > agosto </th>
             <td mat-cell *matCellDef="let element" class="left-text"> 
                 
                 <input class="input-table-field" matInput placeholder="inserisci un valore" #input value="{{element.agosto.workingDay}}" (change)="save(element.agosto.idCalendar,input.value)">
@@ -114,7 +117,7 @@
         </ng-container>
 
         <ng-container matColumnDef="settembre">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> settembre </th>
+            <th mat-header-cell *matHeaderCellDef > settembre </th>
             <td mat-cell *matCellDef="let element" class="left-text"> 
                 
                 <input class="input-table-field" matInput placeholder="inserisci un valore" #input value="{{element.settembre.workingDay}}" (change)="save(element.settembre.idCalendar,input.value)">
@@ -122,7 +125,7 @@
         </ng-container>
 
         <ng-container matColumnDef="ottobbre">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> ottobbre </th>
+            <th mat-header-cell *matHeaderCellDef > ottobbre </th>
             <td mat-cell *matCellDef="let element" class="left-text"> 
                 
                 <input class="input-table-field" matInput placeholder="inserisci un valore" #input value="{{element.ottobbre.workingDay}}" (change)="save(element.ottobbre.idCalendar,input.value)">
@@ -130,15 +133,15 @@
         </ng-container>
 
         <ng-container matColumnDef="novembre">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> novembre </th>
+            <th mat-header-cell *matHeaderCellDef> novembre </th>
             <td mat-cell *matCellDef="let element" class="left-text"> 
                 
-                <input class="input-table-field" matInput placeholder="inserisci un valore" #input value="{{element.novembre.workingDay}}" (change)="save(element.novembre.idCalendar,input.value)">
+                <input class="input-table-field"  matInput placeholder="inserisci un valore" #input value="{{element.novembre.workingDay}}" (change)="save(element.novembre.idCalendar,input.value)">
              </td>
         </ng-container>
 
         <ng-container matColumnDef="dicembre">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> dicembre </th>
+            <th mat-header-cell *matHeaderCellDef > dicembre </th>
             <td mat-cell *matCellDef="let element" class="left-text"> 
                 
                 <input class="input-table-field" matInput placeholder="inserisci un valore" #input value="{{element.dicembre.workingDay}}" (change)="save(element.dicembre.idCalendar,input.value)">
@@ -151,7 +154,7 @@
     </table>
 
 </div>
-<mat-paginator [length]="100" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]"
+<mat-paginator  [pageSize]="500" 
     aria-label="Select page"></mat-paginator>
 
 <br /><br />

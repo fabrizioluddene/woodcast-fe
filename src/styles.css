@@ -197,4 +197,14 @@ tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row.ng-star-inserted
 
 
   
- 
+.forecast-table .cdk-column-nominative {
+    position: sticky;
+    left: 0;
+    z-index: 1; /* Assicura che la colonna fissata sia sopra le altre colonne */
+    border-right: 1px solid #ff4081;
+  }
+
+  .forecast-table .mat-mdc-row:hover{
+    background-color: #ffe4ed;
+
+  }
