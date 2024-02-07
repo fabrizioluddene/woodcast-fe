@@ -1,3 +1,4 @@
+import { formatCurrency } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -84,6 +85,15 @@ export class ForecastComponent {
         }));
 
   }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
   removeColumn(column: string, index: number) {
 
     const columnIndex = this.displayedColumns.indexOf(column);
@@ -119,12 +129,13 @@ export class ForecastComponent {
     })
 
   }
+  formatCurrency(value: number,) {
+    return formatCurrency(value, 'en-US', '€', 'USD', '1.2');
+  }
 
   transformForecastResponse(res: any) {
     var forecastArray = Array<IForecastResponse>();
-    res.forEach((obj: {
-      batchRegistryName: string | null; id: number | null; nominative: string | null; company: string | null; area: string | null; number: string | null; grade: string | null; rate: number | null; pivot: { agosto: { idCalendar: number | null; workingDay: number | null; }; settembre: { idCalendar: number | null; workingDay: number | null; }; ottobbre: { idCalendar: number | null; workingDay: number | null; }; giugno: { idCalendar: number | null; workingDay: number | null; }; gennaio: { idCalendar: number | null; workingDay: number | null; }; febbraio: { idCalendar: number | null; workingDay: number | null; }; luglio: { idCalendar: number | null; workingDay: number | null; }; aprile: { idCalendar: number | null; workingDay: number | null; }; dicembre: { idCalendar: number | null; workingDay: number | null; }; novembre: { idCalendar: number | null; workingDay: number | null; }; maggio: { idCalendar: number | null; workingDay: number | null; }; marzo: { idCalendar: number | null; workingDay: number | null; }; };
-    }) => {
+    res.forEach((obj: { id: number | null; nominative: string | null; company: string | null; area: string | null; batchRegistryName: string | null; number: string | null; grade: string | null; rate: number | null; pivot: { agosto: { idCalendar: number | null; workingDay: number | null; calculatedCost: number | null; calculatedProceeds: number | null; }; settembre: { idCalendar: number | null; workingDay: number | null; calculatedCost: number | null; calculatedProceeds: number | null; }; ottobbre: { idCalendar: number | null; workingDay: number | null; calculatedCost: number | null; calculatedProceeds: number | null; }; giugno: { idCalendar: number | null; workingDay: number | null; calculatedCost: number | null; calculatedProceeds: number | null; }; gennaio: { idCalendar: number | null; workingDay: number | null; calculatedCost: number | null; calculatedProceeds: number | null; }; febbraio: { idCalendar: number | null; workingDay: number | null; calculatedCost: number | null; calculatedProceeds: number | null; }; luglio: { idCalendar: number | null; workingDay: number | null; calculatedCost: number | null; calculatedProceeds: number | null; }; aprile: { idCalendar: number | null; workingDay: number | null; calculatedCost: number | null; calculatedProceeds: number | null; }; dicembre: { idCalendar: number | null; workingDay: number | null; calculatedCost: number | null; calculatedProceeds: number | null; }; novembre: { idCalendar: number | null; workingDay: number | null; calculatedCost: number | null; calculatedProceeds: number | null; }; maggio: { idCalendar: number | null; workingDay: number | null; calculatedCost: number | null; calculatedProceeds: number | null; }; marzo: { idCalendar: number | null; workingDay: number | null; calculatedCost: number | null; calculatedProceeds: number | null; }; }; }) => {
       var forecast: IForecastResponse = {
         id: null,
         nominative: null,
@@ -136,51 +147,75 @@ export class ForecastComponent {
         rate: null,
         agosto: {
           idCalendar: null,
-          workingDay: null
+          workingDay: null,
+          calculatedCost: null,
+          calculatedProceeds: null
         },
         settembre: {
           idCalendar: null,
-          workingDay: null
+          workingDay: null,
+          calculatedCost: null,
+          calculatedProceeds: null
         },
         ottobbre: {
           idCalendar: null,
-          workingDay: null
+          workingDay: null,
+          calculatedCost: null,
+          calculatedProceeds: null
         },
         giugno: {
           idCalendar: null,
-          workingDay: null
+          workingDay: null,
+          calculatedCost: null,
+          calculatedProceeds: null
         },
         gennaio: {
           idCalendar: null,
-          workingDay: null
+          workingDay: null,
+          calculatedCost: null,
+          calculatedProceeds: null
         },
         febbraio: {
           idCalendar: null,
-          workingDay: null
+          workingDay: null,
+          calculatedCost: null,
+          calculatedProceeds: null
         },
         luglio: {
           idCalendar: null,
-          workingDay: null
+          workingDay: null,
+          calculatedCost: null,
+          calculatedProceeds: null
         },
         aprile: {
           idCalendar: null,
-          workingDay: null
+          workingDay: null,
+          calculatedCost: null,
+          calculatedProceeds: null
         },
         dicembre: {
           idCalendar: null,
-          workingDay: null
+          workingDay: null,
+          calculatedCost: null,
+          calculatedProceeds: null
         },
         novembre: {
           idCalendar: null,
-          workingDay: null
+          workingDay: null,
+          calculatedCost: null,
+          calculatedProceeds: null
         },
         maggio: {
           idCalendar: null,
-          workingDay: null
+          workingDay: null,
+          calculatedCost: null,
+          calculatedProceeds: null
         },
         marzo: {
           idCalendar: null,
-          workingDay: null
+          workingDay: null,
+          calculatedCost: null,
+          calculatedProceeds: null
         }
       }
       forecast.id = obj.id;
@@ -212,7 +247,7 @@ export class ForecastComponent {
 }
 
 export interface IForecastResponse {
-
+ 
   id: number | null,
   nominative: string | null,
   company: string | null,
@@ -224,49 +259,73 @@ export interface IForecastResponse {
   agosto: {
     idCalendar: number | null,
     workingDay: number | null,
+    calculatedCost: number | null,
+    calculatedProceeds: number | null
   },
   settembre: {
     idCalendar: number | null,
     workingDay: number | null,
+    calculatedCost: number | null,
+    calculatedProceeds: number | null
   },
   ottobbre: {
     idCalendar: number | null,
     workingDay: number | null,
+    calculatedCost: number | null,
+    calculatedProceeds: number | null
   },
   giugno: {
     idCalendar: number | null,
     workingDay: number | null,
+    calculatedCost: number | null,
+    calculatedProceeds: number | null
   },
   gennaio: {
     idCalendar: number | null,
     workingDay: number | null,
+    calculatedCost: number | null,
+    calculatedProceeds: number | null
   },
   febbraio: {
     idCalendar: number | null,
     workingDay: number | null,
+    calculatedCost: number | null,
+    calculatedProceeds: number | null
   }
   luglio: {
     idCalendar: number | null,
     workingDay: number | null,
+    calculatedCost: number | null,
+    calculatedProceeds: number | null
   },
   aprile: {
     idCalendar: number | null,
     workingDay: number | null,
+    calculatedCost: number | null,
+    calculatedProceeds: number | null
   },
   dicembre: {
     idCalendar: number | null,
     workingDay: number | null,
+    calculatedCost: number | null,
+    calculatedProceeds: number | null
   },
   novembre: {
     idCalendar: number | null,
     workingDay: number | null,
+    calculatedCost: number | null,
+    calculatedProceeds: number | null
   },
   maggio: {
     idCalendar: number | null,
     workingDay: number | null,
+    calculatedCost: number | null,
+    calculatedProceeds: number | null
   },
   marzo: {
     idCalendar: number | null,
     workingDay: number | null,
+    calculatedCost: number | null,
+    calculatedProceeds: number | null
   }
 }
