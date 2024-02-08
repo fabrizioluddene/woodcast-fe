@@ -65,6 +65,7 @@ export class ForecastComponent {
   constructor(private forcastService: ForecastService, private sharedDataService: SharedDataService) {
     this.sharedDataService.variable$.subscribe(value => {
       this.custumers = value;
+      this.getForecast();
     });
   }
 

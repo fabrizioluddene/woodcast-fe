@@ -19,6 +19,10 @@ import { CustomerInsertComponent } from './component/customer/customer-insert/cu
 import { CustomerServiceInsertComponent } from './component/customer-service/customer-service-insert/customer-service-insert.component';
 import { ForecastComponent } from './component/forecast/forecast.component';
 import { ForecastGenerateComponent } from './component/forecast/forecast-generate/forecast-generate.component';
+
+import { HomeComponent } from './component/home/home.component';
+import { DashboardForecastComponent } from './component/forecast/dashboard-forecast/dashboard-forecast.component';
+import { DashboardBatchRegistryComponent } from './component/batch-registry/dashboard-batch-registry/dashboard-batch-registry.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +37,10 @@ import { ForecastGenerateComponent } from './component/forecast/forecast-generat
      CustomerInsertComponent,
      CustomerServiceInsertComponent,
      ForecastComponent,
-     ForecastGenerateComponent
+     ForecastGenerateComponent,
+     HomeComponent,
+     DashboardForecastComponent,
+     DashboardBatchRegistryComponent
   ],
   imports: [
     BrowserModule,

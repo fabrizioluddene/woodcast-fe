@@ -30,21 +30,23 @@ body {
 
 
 
-.mat-toolbar-row, .mat-toolbar-single-row{
-    background-color: #3f51b5!important;
-    
-    color: #fff!important;
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+    background-color: #3f51b5 !important;
+
+    color: #fff !important;
 }
 
 
 .field-title {
-    background-color: #3f51b5;;
+    background-color: #3f51b5;
+    ;
     display: inline-block;
     color: #fff;
     padding: 10px;
     margin-right: 32px;
     border-radius: 100px;
-    
+
 }
 
 .mat-mdc-form-field {
@@ -77,134 +79,221 @@ body {
     width: 90%;
     margin: auto;
     padding-top: 16px;
-    color:  #3f51b5;
+    color: #3f51b5;
 }
-.form-filed-footer{
+
+.form-filed-footer {
     padding: 8px;
     text-align: right;
 }
+
 .example-spacer {
     flex: 1 1 auto;
-  }
-  app-customer-dropdown  {
-    color: #ff4081!important;
-  }
-
-  .inserimento-modal-title{
-    color: #ff4081; 
-    margin: 25px 25px 0 25px!important;
-  }
-  .flex-display mat-icon{
-    
-    line-height: 31px!important;
-  }
-
-  .page-title{
-    color: #ff4081; 
-  }
-  .mat-mdc-header-row {
-    background: #3f51b5!important;
-    color:  #fff!important;
 }
+
+app-customer-dropdown {
+    color: #ff4081 !important;
+}
+
+.inserimento-modal-title {
+    color: #ff4081;
+    margin: 25px 25px 0 25px !important;
+}
+
+.flex-display mat-icon {
+
+    line-height: 31px !important;
+}
+
+.page-title {
+    color: #ff4081;
+}
+
+.mat-mdc-header-row {
+    background: #3f51b5 !important;
+    color: #fff !important;
+}
+
 .example-sidenav {
-    background: #3f51b5!important;
-    color:  #fff!important;
+    background: #3f51b5 !important;
+    color: #fff !important;
     padding: 16px;
-    box-shadow: 0 16px 38px -12px rgba(0,0,0,.56),0 4px 25px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(0,0,0,.2)!important;
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, .56), 0 4px 25px 0 rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .2) !important;
 }
+
 .example-sidenav .mdc-list-item__primary-text {
-    color: #fff!important;
+    color: #fff !important;
 }
-.mdc-list-item__primary-text:hover{
-    color: #ff4081!important;
+
+.mdc-list-item__primary-text:hover {
+    color: #ff4081 !important;
     cursor: pointer;
 }
-.mat-sort-header-arrow, [dir=rtl] .mat-sort-header-position-before .mat-sort-header-arrow{
-    color: #ff4081!important;
+
+.mat-sort-header-arrow,
+[dir=rtl] .mat-sort-header-position-before .mat-sort-header-arrow {
+    color: #ff4081 !important;
 }
-.container{
+
+.container {
     height: 100%;
 }
 
-.mat-mdc-row:nth-child(even){
+.mat-mdc-row:nth-child(even) {
     background-color: #fff;
 }
-        
-.mat-mdc-row:nth-child(odd){
+
+.mat-mdc-row:nth-child(odd) {
     background-color: #fffafa;
 }
-mat-drawer-container{
+
+mat-drawer-container {
     height: 100%;
 }
-.coll-45{
+
+.coll-45 {
     width: 45%;
-    
+
+
 }
-.coll-10{
+
+.coll-50 {
+
+    box-sizing: border-box;
+    /* Includere il padding nella larghezza */
+    width: 50%;
+    float: left;
+    padding: 16px;
+   
+}
+
+.coll-10 {
     width: 10%;
 }
-.float-left{
+
+.float-left {
     float: left;
 }
-.row::after{
+
+.row::after {
     content: " ";
     display: block;
     clear: both;
 }
-.mat-mdc-header-cell .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background{
-    border-color:#fff!important;
+
+.mat-mdc-header-cell .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
+    border-color: #fff !important;
 }
-.mat-mdc-row, .mdc-data-table__content {
-    font-size: 12px!important;
+
+.mat-mdc-row,
+.mdc-data-table__content {
+    font-size: 12px !important;
 }
+
 tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row.ng-star-inserted {
-    font-size: 12px!important;
+    font-size: 12px !important;
 }
 
 .mat-elevation-z1::-webkit-scrollbar {
     height: 10px;
     overflow-y: scroll;
     background: var(--mat-sidenav-content-background-color);
-    
+
 }
 
 .mat-elevation-z1::-webkit-scrollbar-thumb {
     background: #ff4081;
     border-radius: 10px;
- 
+
 }
-.add-element-res:hover{
-    border-bottom:1px solid #ff4081;
+
+.add-element-res:hover {
+    border-bottom: 1px solid #ff4081;
     text-decoration: underline;
     color: #ff4081;
 }
-.add-element-res{
-    -webkit-transition: color .5s; /* For Safari 3.0 to 6.0 */
-    transition: border .5s; /* For modern browsers */
+
+.add-element-res {
+    -webkit-transition: color .5s;
+    /* For Safari 3.0 to 6.0 */
+    transition: border .5s;
+    /* For modern browsers */
 }
-.input-table-field{
+
+.input-table-field {
     border: none;
     width: 30px;
     cursor: pointer;
     outline: none;
-   text-align: center;
+    text-align: center;
     height: 30px;
 }
-.input-table-field:focus{
-    border-bottom: 1px solid #ff4081!important;
-    
+
+.input-table-field:focus {
+    border-bottom: 1px solid #ff4081 !important;
+
 }
 
 
-  
+
 .forecast-table .cdk-column-nominative {
     position: sticky;
     left: 0;
-    z-index: 1; /* Assicura che la colonna fissata sia sopra le altre colonne */
+    z-index: 1;
+    /* Assicura che la colonna fissata sia sopra le altre colonne */
     border-right: 1px solid #ff4081;
-  }
+}
 
-  .forecast-table .mat-mdc-row:hover{
+.forecast-table .mat-mdc-row:hover {
     background-color: #ffe4ed;
 
-  }
+}
+
+.example-card {
+    max-width: 400px;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+.panel {
+    border-radius: 5px;
+    background-color: #fff;
+    border-width: 0;
+    border-style: solid;
+    border: white;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    --mdc-elevated-card-container-shape: 4px;
+    --mdc-outlined-card-container-shape: 4px;
+    --mdc-outlined-card-outline-width: 1px;
+    display: block;
+
+}
+
+.panel-body {
+    padding: 16px;
+}
+
+
+
+.column {
+    box-sizing: border-box;
+    padding: 10px;
+    float: left;
+}
+
+/* Creazione delle colonne di varie dimensioni */
+.colu-1 { width: 8.33%; }
+.colu-2 { width: 16.66%; }
+.colu-3 { width: 25%; }
+.colu-4 { width: 33.33%; }
+.colu-5 { width: 41.66%; }
+.colu-6 { width: 50%; }
+.colu-7 { width: 58.33%; }
+.colu-8 { width: 66.66%; }
+.colu-9 { width: 75%; }
+.colu-10 { width: 83.33%; }
+.colu-11 { width: 91.66%; }
+.colu-12 { width: 100%; }
