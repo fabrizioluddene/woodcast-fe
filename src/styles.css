@@ -297,3 +297,17 @@ tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row.ng-star-inserted
 .colu-10 { width: 83.33%; }
 .colu-11 { width: 91.66%; }
 .colu-12 { width: 100%; }
+
+.spinner-container{
+    width: 100%;
+    height: 100%;
+    position:fixed;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 9999999;
+    text-align: center;
+}
+mat-spinner{
+    margin:-50px auto;
+    top: 50%;
+
+}

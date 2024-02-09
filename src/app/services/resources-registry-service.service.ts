@@ -19,6 +19,13 @@ export class ResourcesRegistryServiceService {
     const URL = this.baseURL + '/rate-param/find-all';
     return this.http.get<IResourceParam[]>(URL);
   }
+  findAllResourceCalendar(idService: any,typeSearch:any): Observable<IResourceRegistry> {
+    const URL = this.baseURL + '/find-all/calendar/service-registry/'+idService+"?typeSearch="+typeSearch;
+    console.log(URL)
+    return this.http.get<IResourceRegistry>(URL);
+  }
+
+ 
 
   save(varia: any): Observable<any> {
     const URL = this.baseURL + '/save';

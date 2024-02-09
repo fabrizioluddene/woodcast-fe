@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { AnagraficaRisorseComponent } from './component/anagrafica-risorse/anagrafica-risorse.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BatchRegistryComponent } from './component/batch-registry/batch-registry.component';
 import { AnagraficaRisorseInsertComponent } from './component/anagrafica-risorse/anagrafica-risorse-insert/anagrafica-risorse-insert.component';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,6 +23,8 @@ import { ForecastGenerateComponent } from './component/forecast/forecast-generat
 import { HomeComponent } from './component/home/home.component';
 import { DashboardForecastComponent } from './component/forecast/dashboard-forecast/dashboard-forecast.component';
 import { DashboardBatchRegistryComponent } from './component/batch-registry/dashboard-batch-registry/dashboard-batch-registry.component';
+import { SpinnerInterceptor } from './interceptor/spinner.interceptor';
+import { SpinnerComponent } from './component/spinner/spinner.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +42,8 @@ import { DashboardBatchRegistryComponent } from './component/batch-registry/dash
      ForecastGenerateComponent,
      HomeComponent,
      DashboardForecastComponent,
-     DashboardBatchRegistryComponent
+     DashboardBatchRegistryComponent,
+     SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -48,10 +51,15 @@ import { DashboardBatchRegistryComponent } from './component/batch-registry/dash
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    FormsModule,ReactiveFormsModule
+    FormsModule,ReactiveFormsModule,
+    HttpClientModule,
     
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: SpinnerInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,17 +1,19 @@
-<mat-drawer-container class="example-container" autosize >
-  
+<mat-drawer-container class="example-container" autosize>
+
 
   <mat-toolbar>
     <button mat-icon-button class="example-icon" aria-label="open" (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <img class="app-logo" src="assets/logo.png">
+    <span style="color: #fff;">
+      <mat-icon>forest</mat-icon>
       <span class="app-title">&nbsp;&nbsp; Woodcast</span>
-      <span class="spacer"></span>
+    </span>
+    <span class="spacer"></span>
     <span class="example-spacer"></span>
     <app-customer-dropdown></app-customer-dropdown>
   </mat-toolbar>
-  <mat-drawer [mode]="push"#drawer class="example-sidenav" mode="side" style="position: fixed; "  >
+  <mat-drawer [mode]="push" #drawer class="example-sidenav" mode="side" style="position: fixed; ">
     <h3>
       <span style="display: flex;">
         <mat-icon mat-list-icon>park</mat-icon>&nbsp;&nbsp;&nbsp;
@@ -19,14 +21,15 @@
       </span>
     </h3>
     <mat-list role="list">
-      <mat-list-item role="listitem" style="margin-bottom: 10px;" routerLink="forecast/generate"  (click)="drawer.close()">
+      <mat-list-item role="listitem" style="margin-bottom: 10px;" routerLink="forecast/generate"
+        (click)="drawer.close()">
         <span style="display: flex;">
           <mat-icon mat-list-icon>edit_square</mat-icon>&nbsp;&nbsp;&nbsp;
           <span>Genera</span>
         </span>
       </mat-list-item>
 
-      <mat-list-item role="listitem" style="margin-bottom: 10px;" routerLink="forecast"  (click)="drawer.close()">
+      <mat-list-item role="listitem" style="margin-bottom: 10px;" routerLink="forecast" (click)="drawer.close()">
 
         <span style="display: flex;">
           <mat-icon mat-list-icon>menu_open</mat-icon>&nbsp;&nbsp;&nbsp;
@@ -43,14 +46,16 @@
       </span>
     </h3>
     <mat-list role="list">
-      <mat-list-item role="listitem" style="margin-bottom: 10px;" routerLink="anagrafica-lotti"  (click)="drawer.close()">
+      <mat-list-item role="listitem" style="margin-bottom: 10px;" routerLink="anagrafica-lotti"
+        (click)="drawer.close()">
         <span style="display: flex;">
           <mat-icon mat-list-icon>extension</mat-icon>&nbsp;&nbsp;&nbsp;
           <span>Anagrafica WBE</span>
         </span>
       </mat-list-item>
 
-      <mat-list-item role="listitem" style="margin-bottom: 10px;" routerLink="anagrafica-risorsa"  (click)="drawer.close()">
+      <mat-list-item role="listitem" style="margin-bottom: 10px;" routerLink="anagrafica-risorsa"
+        (click)="drawer.close()">
 
         <span style="display: flex;">
           <mat-icon mat-list-icon>person</mat-icon>&nbsp;&nbsp;&nbsp;
@@ -69,13 +74,14 @@
     <mat-list role="list">
 
 
-      <mat-list-item role="listitem" style="margin-bottom: 10px;" routerLink="customer"  (click)="drawer.close()">
+      <mat-list-item role="listitem" style="margin-bottom: 10px;" routerLink="customer" (click)="drawer.close()">
         <span style="display: flex;">
           <mat-icon mat-list-icon>account_balance</mat-icon>&nbsp;&nbsp;&nbsp;
           <span>Clienti</span>
         </span>
       </mat-list-item>
-      <mat-list-item role="listitem" style="margin-bottom: 10px;" routerLink="customer-service"  (click)="drawer.close()">
+      <mat-list-item role="listitem" style="margin-bottom: 10px;" routerLink="customer-service"
+        (click)="drawer.close()">
         <span style="display: flex;">
           <mat-icon mat-list-icon>home_repair_service</mat-icon>&nbsp;&nbsp;&nbsp;
           <span>Servizi</span>
@@ -84,11 +90,12 @@
     </mat-list>
 
 
-    
+
   </mat-drawer>
-  <div class="container" >
-    
-    <router-outlet ></router-outlet>
-    
+  <app-spinner></app-spinner>
+  <div class="container">
+
+    <router-outlet></router-outlet>
+
   </div>
 </mat-drawer-container>

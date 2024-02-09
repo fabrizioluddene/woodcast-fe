@@ -13,6 +13,11 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { ForecastService } from 'src/app/services/forecast.service';
 import { ResourcesRegistryServiceService } from 'src/app/services/resources-registry-service.service';
 import { SharedDataService } from 'src/app/services/shared-data-service.service';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar'
 
 @Component({
   selector: 'app-forecast-generate',
@@ -34,14 +39,18 @@ export class ForecastGenerateComponent {
   private subs = new Subscription();
   private dataArray = new Array();
   selectAll: boolean = false
-  private dataToadd = new Array();
+  
+  private dataArrayAddOnservice = new Array();
+  private dataTosave = new Array();
+  
 
   constructor(
     private _formBuilder: FormBuilder,
     private sharedDataService: SharedDataService,
     public customerService: CustomerService,
     private resourcesRegistryServiceService: ResourcesRegistryServiceService,
-    private forecastService : ForecastService
+    private forecastService: ForecastService,
+    private _snackBar: MatSnackBar
 
   ) {
     this.sharedDataService.variable$.subscribe(value => {
@@ -53,10 +62,10 @@ export class ForecastGenerateComponent {
   forecastCalendarSave: IForecastCalendarSave | undefined;
   customerServiceId: number | null = 0;
   generaForecast() {
-    var pippo = { id: this.customerServiceId }
+
     var resource = new Array();
-    this.dataToadd.forEach((element) => {
-      
+    this.dataTosave.forEach((element) => {
+
 
       resource.push(element)
     })
@@ -64,13 +73,25 @@ export class ForecastGenerateComponent {
       resource: resource,
       customerService: {
         id: this.customerServiceId,
-        name:  null,
-        rate:  null
+        name: null,
+        rate: null
       }
 
     }
-    this.forecastService.create(this.forecastCalendarSave).subscribe();
-    console.log(JSON.stringify(this.forecastCalendarSave));
+    if(this.dataTosave.length>0){
+      this.forecastService.create(this.forecastCalendarSave).subscribe();
+      this._snackBar.open('Forecast generato con successo', 'grazie', {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+    }else{
+      
+      this._snackBar.open('Selezionare almeno un elemento capra!', 'scusa', {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+    }
+    
   }
 
   addAllChecked() {
@@ -82,14 +103,14 @@ export class ForecastGenerateComponent {
 
         dataArrayNew.push(item);
       } else {
-        this.dataToadd.push(item);
-
+        this.dataTosave.push(item);
+        this.dataArrayAddOnservice.push(item)
       }
     });
     this.dataArray = dataArrayNew;
 
     this.dataSource = new MatTableDataSource<IResourceRegistry>(this.dataArray);
-    this.dataSourceAddOnservice = new MatTableDataSource<IResourceRegistry>(this.dataToadd);
+    this.dataSourceAddOnservice = new MatTableDataSource<IResourceRegistry>(this.dataArrayAddOnservice);
 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -101,8 +122,9 @@ export class ForecastGenerateComponent {
   addElementOnService(arg0: any) {
 
 
-    this.dataToadd.push(arg0);
-    this.dataSourceAddOnservice = new MatTableDataSource<IResourceRegistry>(this.dataToadd);
+    this.dataTosave.push(arg0);
+    this.dataArrayAddOnservice.push(arg0)
+    this.dataSourceAddOnservice = new MatTableDataSource<IResourceRegistry>(this.dataArrayAddOnservice);
 
     this.removeElement(arg0);
     this.dataSource.paginator = this.paginator;
@@ -113,18 +135,33 @@ export class ForecastGenerateComponent {
   }
 
   removeElement(arg0: any) {
-    console.log("entro")
+
     this.dataArray.forEach((item: any, index: any) => {
       if (item.nominative === arg0.nominative) {
         this.dataArray.splice(index, 1);
       }
     });
   }
+
+
+  toRemove(arg0: any): number | null {
+    let indexToReturn: number | undefined;
+    for (let index = 0; index < this.dataArray.length; index++) {
+      const item = this.dataArray[index];
+      if (item.nominative === arg0) {
+        indexToReturn = index;
+        break; // Interrompe il ciclo una volta trovato l'elemento
+      }
+    }
+    return indexToReturn !== undefined ? indexToReturn : null; // Restituisce l'indice se trovato, altrimenti -1
+  }
+
   viewResources(custoomerServiceId: number | null) {
-    this.dataToadd = new Array();
+
+    
     this.dataSourceAddOnservice = new MatTableDataSource<IResourceRegistry>();
     this.customerServiceId = custoomerServiceId
-    this.findAllResources();
+    this.findAllResources(custoomerServiceId);
   }
 
   getCustomerService(id: number | null) {
@@ -149,21 +186,41 @@ export class ForecastGenerateComponent {
     }
   }
 
-  findAllResources(): void {
-    this.resourcesRegistryServiceService.getRandomUsers()
+  findAllResources(custoomerServiceId: number | null): void {
+    this.resourcesRegistryServiceService.findAllResourceCalendar(custoomerServiceId, 'NO_CALENDAR')
       .subscribe((res) => {
 
         this.dataArray = res.resources;
 
-        console.log(this.dataArray)
-
         this.dataSource = new MatTableDataSource<IResourceRegistry>(this.dataArray);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.resourcesRegistryServiceService.findAllResourceCalendar(custoomerServiceId, 'CALENDAR')
+          .subscribe((res) => {
+
+            this.dataArrayAddOnservice = res.resources;
+
+            this.dataSourceAddOnservice = new MatTableDataSource<IResourceRegistry>(this.dataArrayAddOnservice);
+            this.dataSourceAddOnservice.paginator = this.paginator;
+            this.dataSourceAddOnservice.sort = this.sort;
+
+
+
+          },
+            (err: HttpErrorResponse) => {
+              console.log(err);
+            });
+
+
       },
         (err: HttpErrorResponse) => {
           console.log(err);
         });
+
+
+
+
+
   }
   setAll(completed: boolean) {
 

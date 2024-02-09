@@ -20,8 +20,8 @@
 </div>
 <br /><br />
 
-<mat-tab-group>
-    <mat-tab label="Forecast">
+<mat-tab-group (selectedTabChange)="reloadForecast()">
+    <mat-tab label="Forecast" >
         <br />
         <div class="mat-elevation-z1 forecast-table" style="overflow: auto;">
             <table [width]="1200" mat-table [dataSource]="dataSource" matSort matSortActive="batchRegistryName"
@@ -186,7 +186,7 @@
 
         </div>
     </mat-tab>
-    <mat-tab label="Costi"> 
+    <mat-tab label="Costi" > 
         <br />
         <div class="mat-elevation-z1 forecast-table" style="overflow: auto;">
             <table [width]="1200" mat-table [dataSource]="dataSource" matSort matSortActive="batchRegistryName"
@@ -328,7 +328,7 @@
 
         </div>  
     </mat-tab>
-    <mat-tab label="Margini"> 
+    <mat-tab label="Margini" > 
         <br />
         <div class="mat-elevation-z1 forecast-table" style="overflow: auto;">
             <table [width]="1200" mat-table [dataSource]="dataSource" matSort matSortActive="batchRegistryName"

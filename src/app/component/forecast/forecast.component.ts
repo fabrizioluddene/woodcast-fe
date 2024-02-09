@@ -72,6 +72,10 @@ export class ForecastComponent {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+  reloadForecast(){
+   
+    this.getForecast();
+  }
 
   getForecast() {
 
@@ -126,7 +130,7 @@ export class ForecastComponent {
   save(elemento: any, inp: any) {
     console.log(elemento)
     this.forcastService.save({ calendarId: elemento, workingDay: inp }).subscribe(res => {
-      this.getForecast();
+      
     })
 
   }
