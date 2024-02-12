@@ -9,11 +9,11 @@
 </h1>
 
 <mat-form-field>
-    <mat-label>Servizio</mat-label>
+    <mat-label>WBA</mat-label>
     <mat-select>
         <span *ngFor="let customerServiceModel of customerServiceModels; let i = index">
             <mat-option value="{{customerServiceModel.id}}"
-                (click)="viewResources(customerServiceModel.id)">{{customerServiceModel.name}} </mat-option>
+                (click)="viewResources(customerServiceModel.id)">{{customerServiceModel.order}} - {{customerServiceModel.description}}</mat-option>
         </span>
     </mat-select>
 

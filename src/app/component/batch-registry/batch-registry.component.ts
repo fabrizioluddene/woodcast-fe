@@ -25,7 +25,7 @@ export class BatchRegistryComponent {
   }
   private subs = new Subscription();
 
-  displayedColumns: string[] = ['order',
+  displayedColumns: string[] = ['azioni','order',
     'description', 'pm', 'orderType',
     'orderStatus', 'proceeds', 'expectedMargin',
     'expectedMarginEU',  'proceedsDayPlafond',
@@ -44,7 +44,7 @@ export class BatchRegistryComponent {
   totalCostAmount!: number;
   custumers!: ICustomer
 
-  constructor(private financeService: BatchRegistryService, private _snackBar: MatSnackBar, private sharedDataService: SharedDataService, public dialog: MatDialog) {
+  constructor(private batchRegistryService: BatchRegistryService, private _snackBar: MatSnackBar, private sharedDataService: SharedDataService, public dialog: MatDialog) {
     this.sharedDataService.variable$.subscribe(value => {
       this.custumers = value;
       if (this.custumers) {
@@ -53,7 +53,7 @@ export class BatchRegistryComponent {
     });
   }
   getBatchRegistry(id: number | null) {
-    this.subs.add(this.financeService.getBatchRegistry(this.custumers.id)
+    this.subs.add(this.batchRegistryService.getBatchRegistry(this.custumers.id)
       .subscribe((res) => {
 
         this.dataArray = res;
@@ -95,7 +95,14 @@ export class BatchRegistryComponent {
       this.dataSource.paginator.firstPage();
     }
   }
+  delete(id: any){
+    this.batchRegistryService.delete(id).subscribe(result => {
+     
+      this.getBatchRegistry(this.custumers.id);
 
+    })
+
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(InserimentoComponent, {

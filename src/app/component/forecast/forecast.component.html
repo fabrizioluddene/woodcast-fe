@@ -6,10 +6,7 @@
     </span>
 </h1>
 
-<mat-form-field>
-    <mat-label>Ricerca</mat-label>
-    <input matInput placeholder="inserisci un valore" #input (keyup)="applyFilter($event)">
-</mat-form-field>
+
 <div style="display: flex; vertical-align: middle;">
     <b style="line-height: 36px;">Visualizza colonne: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <button *ngFor="let col of column; let i = index" type="submit" mat-flat-button color="{{col.color}}"
@@ -18,10 +15,53 @@
         {{col.name}}
     </button>
 </div>
-<br /><br />
+<div class="row">
+    
+    <div class="column colu-6">
+        <mat-form-field>
+            <mat-label>WBA</mat-label>
+            <mat-select>
+                <span>
+                    <mat-option
+                        (click)="filterForecst(undefined)">Seleziona tutti</mat-option>
+                </span>
+                <span *ngFor="let customerServiceModel of customerServiceModels; let i = index">
+                    <mat-option value="{{customerServiceModel.id}}"
+                        (click)="filterForecst(customerServiceModel.id)">{{customerServiceModel.order}} - {{customerServiceModel.description}}</mat-option>
+                </span>
+            </mat-select>
+        
+        </mat-form-field>
+    </div>
+    <div class="column colu-6">
+        <mat-form-field>
+            <mat-label>Ricerca</mat-label>
+            <input matInput placeholder="inserisci un valore" #input (keyup)="applyFilter($event)">
+        </mat-form-field>
+    </div>
+</div>
+<div class="field-title" [ngClass]="{'color-yellow': revenuesCosts.stoplight==='YELLOW','color-green': revenuesCosts.stoplight==='GREEN','color-red': revenuesCosts.stoplight==='RED'}">
+    <span style="display: flex;">
+        <mat-icon>{{icon}}</mat-icon>&nbsp;&nbsp;
+        <span style="    line-height: 30px;">Ricavi Totali : {{formatCurrency(revenuesCosts.revenues)}}</span>
+    </span>
+</div>
+<div class="field-title ">
+    <span style="display: flex;">
+        <mat-icon>euro</mat-icon>&nbsp;&nbsp;
+        <span style="    line-height: 30px;">Ricavi inseriti Totali: {{formatCurrency(revenuesCosts.expectingPreceed)}}</span>
+    </span>
+</div>
+<div class="field-title ">
+    <span style="display: flex;">
+        <mat-icon>euro</mat-icon>&nbsp;&nbsp;
+        <span style="    line-height: 30px;">Costi Totali: {{formatCurrency(revenuesCosts.costs)}}</span>
+    </span>
+</div>
+
 
 <mat-tab-group (selectedTabChange)="reloadForecast()">
-    <mat-tab label="Forecast" >
+    <mat-tab label="Forecast">
         <br />
         <div class="mat-elevation-z1 forecast-table" style="overflow: auto;">
             <table [width]="1200" mat-table [dataSource]="dataSource" matSort matSortActive="batchRegistryName"
@@ -186,7 +226,7 @@
 
         </div>
     </mat-tab>
-    <mat-tab label="Costi" > 
+    <mat-tab label="Costi">
         <br />
         <div class="mat-elevation-z1 forecast-table" style="overflow: auto;">
             <table [width]="1200" mat-table [dataSource]="dataSource" matSort matSortActive="batchRegistryName"
@@ -202,7 +242,8 @@
 
                 <ng-container matColumnDef="area">
                     <th mat-header-cell *matHeaderCellDef> Ambito </th>
-                    <td mat-cell *matCellDef="let element" class="left-text" style=" white-space: nowrap;">{{element.area}} </td>
+                    <td mat-cell *matCellDef="let element" class="left-text" style=" white-space: nowrap;">
+                        {{element.area}} </td>
                 </ng-container>
 
 
@@ -227,7 +268,7 @@
                 <ng-container matColumnDef="gennaio">
                     <th mat-header-cell *matHeaderCellDef> gennaio </th>
                     <td mat-cell *matCellDef="let element" class="left-text">
-                        
+
                         {{formatCurrency(element.gennaio.calculatedCost)}}
                     </td>
                 </ng-container>
@@ -236,7 +277,7 @@
                     <th mat-header-cell *matHeaderCellDef style="width: 93px;"> febbraio </th>
                     <td mat-cell *matCellDef="let element" class="left-text">
                         {{formatCurrency(element.febbraio.calculatedCost)}}
-                        
+
                     </td>
                 </ng-container>
 
@@ -326,9 +367,9 @@
             </table>
 
 
-        </div>  
+        </div>
     </mat-tab>
-    <mat-tab label="Margini" > 
+    <mat-tab label="Ricavi">
         <br />
         <div class="mat-elevation-z1 forecast-table" style="overflow: auto;">
             <table [width]="1200" mat-table [dataSource]="dataSource" matSort matSortActive="batchRegistryName"
@@ -344,7 +385,8 @@
 
                 <ng-container matColumnDef="area">
                     <th mat-header-cell *matHeaderCellDef> Ambito </th>
-                    <td mat-cell *matCellDef="let element" class="left-text" style=" white-space: nowrap;">{{element.area}} </td>
+                    <td mat-cell *matCellDef="let element" class="left-text" style=" white-space: nowrap;">
+                        {{element.area}} </td>
                 </ng-container>
 
 
@@ -369,7 +411,7 @@
                 <ng-container matColumnDef="gennaio">
                     <th mat-header-cell *matHeaderCellDef> gennaio </th>
                     <td mat-cell *matCellDef="let element" class="left-text">
-                        
+
                         {{formatCurrency(element.gennaio.calculatedProceeds)}}
                     </td>
                 </ng-container>
@@ -378,7 +420,7 @@
                     <th mat-header-cell *matHeaderCellDef style="width: 93px;"> febbraio </th>
                     <td mat-cell *matCellDef="let element" class="left-text">
                         {{formatCurrency(element.febbraio.calculatedProceeds)}}
-                        
+
                     </td>
                 </ng-container>
 
@@ -468,7 +510,7 @@
             </table>
 
 
-        </div>  
+        </div>
     </mat-tab>
 </mat-tab-group>
 <mat-paginator [pageSize]="500" aria-label="Select page"></mat-paginator>

@@ -40,13 +40,21 @@ body {
 
 .field-title {
     background-color: #3f51b5;
-    ;
     display: inline-block;
     color: #fff;
     padding: 10px;
     margin-right: 32px;
-    border-radius: 100px;
+    border-radius: 5px;
 
+}
+.color-red{
+    background-color: red!important;
+}
+.color-yellow{
+    background-color: rgb(241, 197, 0)!important;
+}
+.color-green{
+    background-color: green!important;
 }
 
 .mat-mdc-form-field {
@@ -310,4 +318,8 @@ mat-spinner{
     margin:-50px auto;
     top: 50%;
 
+}
+
+.icon-azioni:hover{
+    color: #ff4081;
 }

@@ -42,4 +42,21 @@ export class ForecastService {
     const URL = this.baseURL + '/'+idCustomer;
     return this.http.get<any[]>(URL);
   }
+  getForecastBybatchRegistry(idCustomer:number | null,idBathregisrty:number | undefined): Observable<any[]> {
+    let URL  = this.baseURL + '/'+idCustomer;
+    if(idBathregisrty){
+       URL = URL+"?batchRegistryId="+idBathregisrty;
+    }
+    
+    return this.http.get<any[]>(URL);
+  }
+
+  getForecastRevenuesCosts(idCustomer:number | null,idBathregisrty:number | undefined): Observable<any> {
+    let URL  = this.baseURL + '/costi-ricavi/'+idCustomer;
+    if(idBathregisrty){
+       URL = URL+"?batchRegistryId="+idBathregisrty;
+    }
+    
+    return this.http.get<any>(URL);
+  }
 }

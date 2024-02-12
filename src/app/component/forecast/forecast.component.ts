@@ -5,8 +5,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
+import { IBatchRegistry } from 'src/app/model/batch-registry';
 import { ICustomer } from 'src/app/model/customer';
 import { IForecast } from 'src/app/model/forecast';
+import { IRevenuesCosts } from 'src/app/model/revenues-costs';
+import { CustomerService } from 'src/app/services/customer.service';
 import { ForecastService } from 'src/app/services/forecast.service';
 import { SharedDataService } from 'src/app/services/shared-data-service.service';
 
@@ -58,28 +61,50 @@ export class ForecastComponent {
   displayedColumns: string[] = this.originalColumns.slice();
   dataSource = new MatTableDataSource<IForecastResponse>();
   dataArray: any;
-
+  idBathRegistry: number | undefined;
+  revenuesCosts!: IRevenuesCosts;
   private subs = new Subscription();
   custumers!: ICustomer
 
-  constructor(private forcastService: ForecastService, private sharedDataService: SharedDataService) {
+  icon: string | undefined;
+
+  constructor(
+    private forcastService: ForecastService,
+    private sharedDataService: SharedDataService,
+    public customerService: CustomerService) {
     this.sharedDataService.variable$.subscribe(value => {
       this.custumers = value;
       this.getForecast();
     });
   }
+  filterForecst(id: number | undefined) {
+    this.idBathRegistry = id
+    this.getForecast();
+  }
+  customerServiceModels: IBatchRegistry[] | undefined;
+  getBatchRegisrty() {
+    this.subs.add(this.customerService.getCustomerServices(this.custumers.id)
+      .subscribe((res) => {
 
+        this.customerServiceModels = res;
+
+
+      },
+        (err: HttpErrorResponse) => {
+          console.log(err);
+        }));
+  }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  reloadForecast(){
-   
+  reloadForecast() {
+
     this.getForecast();
   }
 
   getForecast() {
 
-    this.subs.add(this.forcastService.getForecast(this.custumers.id)
+    this.subs.add(this.forcastService.getForecastBybatchRegistry(this.custumers.id, this.idBathRegistry)
       .subscribe((res) => {
         this.dataSource = new MatTableDataSource<IForecastResponse>(this.transformForecastResponse(res));
         this.dataSource.paginator = this.paginator;
@@ -89,6 +114,26 @@ export class ForecastComponent {
           console.log(err);
         }));
 
+    this.getForecastRevenuesCosts();
+
+  }
+
+  getForecastRevenuesCosts() {
+    this.forcastService.getForecastRevenuesCosts(this.custumers.id, this.idBathRegistry)
+    
+      .subscribe((res) => {
+        this.revenuesCosts = res;
+        if (res.stoplight === "YELLOW") {
+          this.icon = 'sentiment_neutral'
+        } else if (res.stoplight === "RED") {
+          this.icon = 'sentiment_very_dissatisfied'
+        } else if (res.stoplight === "GREEN") {
+          this.icon = 'sentiment_satisfied'
+        }
+      },
+        (err: HttpErrorResponse) => {
+          console.log(err);
+        })
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -110,18 +155,19 @@ export class ForecastComponent {
         this.displayedColumns.splice(originalIndex, 0, column); // Aggiungi la colonna nella posizione originale
       }
     }
-    if("visibility" ===this.column[index].icon){
+    if ("visibility" === this.column[index].icon) {
       this.column[index].icon = "visibility_off";
       this.column[index].color = "";
-    }else{
+    } else {
       this.column[index].icon = "visibility";
       this.column[index].color = "accent";
     }
-    
+
 
   }
 
   ngOnInit() {
+    this.getBatchRegisrty();
     this.getForecast();
   }
 
@@ -130,12 +176,18 @@ export class ForecastComponent {
   save(elemento: any, inp: any) {
     console.log(elemento)
     this.forcastService.save({ calendarId: elemento, workingDay: inp }).subscribe(res => {
-      
+      this.getForecastRevenuesCosts();
     })
 
   }
-  formatCurrency(value: number,) {
-    return formatCurrency(value, 'en-US', '€', 'USD', '1.2');
+  formatCurrency(value: number | null,) {
+    if (value) {
+      return formatCurrency(value, 'en-US', '€', 'USD', '1.2');
+
+    } else {
+      return 0;
+    }
+
   }
 
   transformForecastResponse(res: any) {
@@ -252,7 +304,7 @@ export class ForecastComponent {
 }
 
 export interface IForecastResponse {
- 
+
   id: number | null,
   nominative: string | null,
   company: string | null,

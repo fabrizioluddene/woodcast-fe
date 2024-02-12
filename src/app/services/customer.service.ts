@@ -3,6 +3,7 @@ import { Observable, catchError } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { ICustomer } from '../model/customer';
 import { ICustomerService } from '../model/customer-service';
+import { IBatchRegistry } from '../model/batch-registry';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,9 +15,9 @@ export class CustomerService {
     return this.http.get<ICustomer[]>(URL);
   }
 
-  getCustomerServices(idCustomer:number | null): Observable<ICustomerService[]> {
+  getCustomerServices(idCustomer:number | null): Observable<IBatchRegistry[]> {
     const URL = this.baseURL + '/'+idCustomer+'/service';
-    return this.http.get<ICustomerService[]>(URL);
+    return this.http.get<IBatchRegistry[]>(URL);
   }
   save(customerName:ICustomer): Observable<ICustomer> {
     const URL = this.baseURL + '/save';

@@ -27,4 +27,15 @@ export class BatchRegistryService {
     console.log(URL)
     return this.http.post<any>(URL, varia,httpOptions);
   }
+  delete(id: any): Observable<any> {
+    const URL = this.baseURL + '/batch-registry/'+id;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'my-auth-token'
+      })
+    };
+    console.log(URL)
+    return this.http.delete<any>(URL, httpOptions);
+  }
 }

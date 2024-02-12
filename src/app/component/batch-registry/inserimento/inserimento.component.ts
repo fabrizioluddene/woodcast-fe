@@ -10,12 +10,9 @@ import {
   MatDialogRef,
 
 } from '@angular/material/dialog';
-import { FloatLabelType } from '@angular/material/form-field';
 import { Subscription } from 'rxjs';
-
 import { IBatchRegistry } from 'src/app/model/batch-registry';
 import { ICustomer } from 'src/app/model/customer';
-import { ICustomerService } from 'src/app/model/customer-service';
 import { BatchRegistryService } from 'src/app/services/batch-registry.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { SharedDataService } from 'src/app/services/shared-data-service.service';
@@ -29,8 +26,7 @@ import { SharedDataService } from 'src/app/services/shared-data-service.service'
 export class InserimentoComponent {
 
   private subs = new Subscription();
-  custumers!: ICustomer  
-  customerServiceModels: ICustomerService[] | undefined;
+  custumers!: ICustomer
   batchRegistryModel: IBatchRegistry = {
     id: 0,
     order: null,
@@ -48,13 +44,14 @@ export class InserimentoComponent {
     expectedMargin: 0,
     idCustomerService: 0,
     customerService: null,
-    expectedMarginEU:0,
+    expectedMarginEU: 0,
     effectiveCosts: 0,
-    averageRate:0,
-    deltaEffectiveCost:0,
-    totalEffectiveDay:0,
-    calculateMargin:0,
-    effectiveMUP:0
+    averageRate: 0,
+    deltaEffectiveCost: 0,
+    totalEffectiveDay: 0,
+    calculateMargin: 0,
+    effectiveMUP: 0,
+    vendorRate: 0
 
   };
   form = this._formBuilder.group({
@@ -67,8 +64,9 @@ export class InserimentoComponent {
     proceeds: ['', [Validators.required]],
     note: ['', [Validators.required]],
     proceedsDayPlafond: ['', [Validators.required]],
-    expectedMargin:['', [Validators.required]],
-    idCustomerService: ['', [Validators.required]],
+    expectedMargin: ['', [Validators.required]],
+    vendorCost: ['', [Validators.required]],
+
   });
   constructor(
     private _formBuilder: FormBuilder,
@@ -83,31 +81,16 @@ export class InserimentoComponent {
 
     });
   }
-  ngOnInit() {
-    this.getCustomerService(this.custumers.id);
 
-  }
-  getCustomerService(id: number | null) {
-    this.subs.add(this.customerService.getCustomerServices(this.custumers.id)
-      .subscribe((res) => {
 
-        this.customerServiceModels = res;
-        console.log(this.customerServiceModels);
-
-      },
-        (err: HttpErrorResponse) => {
-          console.log(err);
-        }));
-  }
   sub() {
-    if ('INVALID' !== this.form.status && this.batchRegistryModel) {
-      var idCustomerService: number;
+    if ('INVALID' !== this.form.status && this.batchRegistryModel && this.custumers.id) {
       var proceeds: number;
-      var proceedsDayPlafond: number;
       var expectedMargin: number;
-      if (this.form.controls['idCustomerService'].value) {
-        idCustomerService = +this.form.controls['idCustomerService'].value;
-        this.batchRegistryModel.idCustomerService = idCustomerService
+      var vendorRate: number;
+      if (this.custumers.id) {
+
+        this.batchRegistryModel.idCustomerService = this.custumers.id
       }
       if (this.form.controls['proceeds'].value) {
         proceeds = +this.form.controls['proceeds'].value;
@@ -116,6 +99,10 @@ export class InserimentoComponent {
       if (this.form.controls['proceeds'].value) {
         proceeds = +this.form.controls['proceeds'].value;
         this.batchRegistryModel.proceeds = proceeds;
+      }
+      if (this.form.controls['vendorCost'].value) {
+        vendorRate = +this.form.controls['vendorCost'].value;
+        this.batchRegistryModel.vendorRate = vendorRate;
       }
       if (this.form.controls['expectedMargin'].value) {
         expectedMargin = +this.form.controls['expectedMargin'].value;
@@ -126,15 +113,15 @@ export class InserimentoComponent {
       this.batchRegistryModel.pm = this.form.controls['pm'].value;
       this.batchRegistryModel.orderType = this.form.controls['orderType'].value;
       this.batchRegistryModel.orderStatus = this.form.controls['orderStatus'].value;
-      
+
       this.batchRegistryModel.note = this.form.controls['note'].value;
-      
+
 
 
 
       this.batchRegistryService.save(this.batchRegistryModel).subscribe(result => {
         console.log(result);
-        
+
 
       })
       this.dialogRef.close();

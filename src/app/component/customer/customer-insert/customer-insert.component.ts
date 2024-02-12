@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { BatchRegistryService } from 'src/app/services/batch-registry.service';
 import { CustomerService } from 'src/app/services/customer.service';
-import { CustomerServiceInsertComponent } from '../../customer-service/customer-service-insert/customer-service-insert.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ICustomer } from 'src/app/model/customer';
 
@@ -26,7 +25,7 @@ export class CustomerInsertComponent {
     private _formBuilder: FormBuilder,
     public customerService: CustomerService,
     private batchRegistryService: BatchRegistryService,
-    public dialogRef: MatDialogRef<CustomerServiceInsertComponent>,
+    public dialogRef: MatDialogRef<CustomerInsertComponent>,
     ) {
 
   }

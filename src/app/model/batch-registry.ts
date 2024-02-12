@@ -21,6 +21,8 @@ export interface IBatchRegistry {
     deltaEffectiveCost:number | null,
     totalEffectiveDay: number | null,
     calculateMargin: number | null,
-    effectiveMUP: number | null
+    effectiveMUP: number | null,
+    vendorRate: number | null,
+    
 
 }

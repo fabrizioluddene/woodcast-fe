@@ -18,6 +18,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar'
+import { IBatchRegistry } from 'src/app/model/batch-registry';
 
 @Component({
   selector: 'app-forecast-generate',
@@ -32,7 +33,7 @@ export class ForecastGenerateComponent {
   sort!: MatSort;
   dataSource!: MatTableDataSource<IResourceRegistry>;
   dataSourceAddOnservice!: MatTableDataSource<IResourceRegistry>;
-  customerServiceModels: ICustomerService[] | undefined;
+  customerServiceModels: IBatchRegistry[] | undefined;
   custumers!: ICustomer;
   displayedColumns: string[] = ['*', 'nominative', 'grade', 'rate'];
   displayedColumnsAdded: string[] = ['nominative', 'grade', 'rate'];
@@ -169,7 +170,7 @@ export class ForecastGenerateComponent {
       .subscribe((res) => {
 
         this.customerServiceModels = res;
-        console.log(this.customerServiceModels);
+        
 
       },
         (err: HttpErrorResponse) => {

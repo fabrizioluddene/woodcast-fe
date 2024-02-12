@@ -13,7 +13,10 @@
 <div class="mat-elevation-z1" style="overflow: auto;">
     
     <table [width]="2632" mat-table [dataSource]="dataSource" matSort  matSortActive="order" matSortDisableClear matSortDirection="asc">
-        
+        <ng-container  matColumnDef="azioni">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 139px;"> Azioni </th>
+            <td mat-cell *matCellDef="let element" class="left-text"> <mat-icon class="icon-azioni" (click)="delete(element.id)" style="cursor: pointer;">delete</mat-icon> </td>
+        </ng-container>
         <ng-container  matColumnDef="order">
             <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 139px;"> Commessa </th>
             <td mat-cell *matCellDef="let element" class="left-text"> {{element.order}} </td>

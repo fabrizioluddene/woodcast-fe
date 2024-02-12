@@ -1,16 +1,9 @@
 <h1 class="page-title flex-display inserimento-modal-title"><span class=" flex-display "><mat-icon>extension</mat-icon> Inserisci Commessa</span></h1>
 <form [formGroup]="form" (ngSubmit)="sub()">
     <div mat-dialog-content>
-        <mat-form-field>
-            <mat-label>Servizio</mat-label>
-            <mat-select formControlName="idCustomerService">
-                <span *ngFor="let customerServiceModel of customerServiceModels; let i = index">
-                    <mat-option value="{{customerServiceModel.id}}">{{customerServiceModel.name}} -
-                        {{customerServiceModel.rate}}</mat-option>
-                </span>
-            </mat-select>
+       
 
-        </mat-form-field>
+        
         <mat-form-field>
             <mat-label>Commessa</mat-label>
             <input matInput placeholder="inserisci un valore" #input formControlName="order">
@@ -28,9 +21,9 @@
             <mat-select formControlName="orderType">
                 <mat-option value="R">Ricavo</mat-option>
                 <mat-option value="A">Altro</mat-option>
-
             </mat-select>
         </mat-form-field>
+        
         <mat-form-field>
             <mat-label>Stato Lotto</mat-label>
             <mat-select formControlName="orderStatus">
@@ -38,6 +31,11 @@
                 <mat-option value="C">Chiuso</mat-option>
 
             </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Costo di Vendita</mat-label>
+            <input matInput placeholder="inserisci un valore" #input formControlName="vendorCost">
+            <mat-icon matSuffix>euro</mat-icon>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Ricavo</mat-label>
