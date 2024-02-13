@@ -62,7 +62,12 @@ export class ForecastComponent {
   dataSource = new MatTableDataSource<IForecastResponse>();
   dataArray: any;
   idBathRegistry: number | undefined;
-  revenuesCosts!: IRevenuesCosts;
+  revenuesCosts: IRevenuesCosts ={
+    costs: null,
+    revenues: null,
+    expectingPreceed: null,
+    stoplight: ""
+  };
   private subs = new Subscription();
   custumers!: ICustomer
 
@@ -75,11 +80,13 @@ export class ForecastComponent {
     this.sharedDataService.variable$.subscribe(value => {
       this.custumers = value;
       this.getForecast();
+      this.getBatchRegisrty();
     });
   }
   filterForecst(id: number | undefined) {
     this.idBathRegistry = id
     this.getForecast();
+    
   }
   customerServiceModels: IBatchRegistry[] | undefined;
   getBatchRegisrty() {
@@ -165,13 +172,6 @@ export class ForecastComponent {
 
 
   }
-
-  ngOnInit() {
-    this.getBatchRegisrty();
-    this.getForecast();
-  }
-
-
 
   save(elemento: any, inp: any) {
     console.log(elemento)

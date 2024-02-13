@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'forecast/generate', component: ForecastGenerateComponent , canActivate:[AuthGuard]},
   { path: 'forecast', component: ForecastComponent , canActivate:[AuthGuard]},
   { path: '', component: HomeComponent , canActivate:[AuthGuard]},
+  { path: 'home', component: HomeComponent , canActivate:[AuthGuard]},
   { path: 'login', component: LoginComponent },
 ];
 

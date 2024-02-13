@@ -1,3 +1,4 @@
+
 <button class="customer-dropdown-botto" mat-button [matMenuTriggerFor]="menu">
     <mat-icon>pets</mat-icon> {{customerName}}
 </button>
@@ -5,4 +6,7 @@
     <span *ngFor="let customer of customers; let i = index">
         <button mat-menu-item (click)="changeCustomer(customer)">{{customer.customerName}}</button>
     </span>
-</mat-menu>
+</mat-menu> | &nbsp;
+<button class="customer-dropdown-botto" mat-button (click)="logout()">
+    <mat-icon>logout</mat-icon> {{username}}
+</button>

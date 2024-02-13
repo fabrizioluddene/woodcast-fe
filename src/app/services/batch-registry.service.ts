@@ -21,7 +21,7 @@ export class BatchRegistryService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'Authorization': 'my-auth-token'
+        
       })
     };
     console.log(URL)
@@ -32,7 +32,7 @@ export class BatchRegistryService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'Authorization': 'my-auth-token'
+        
       })
     };
     console.log(URL)

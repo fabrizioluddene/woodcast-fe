@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AuthGuard } from './auth/auth.guard';
+import { IUser } from './model/user';
+
 
 @Component({
   selector: 'app-root',
@@ -7,5 +10,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'woodcast';
-push: any;
+  push: any;
+
+
+  isAuthenticated: any;
+ 
+
+  constructor(private authGuard: AuthGuard) {
+
+  }
+
+  ngOnInit() {
+    this.isAuthenticated = this.authGuard.canActivate();
+  }
+
 }

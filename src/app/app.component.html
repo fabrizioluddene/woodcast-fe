@@ -1,7 +1,7 @@
 <mat-drawer-container class="example-container" autosize>
 
 
-  <mat-toolbar>
+  <mat-toolbar *ngIf="isAuthenticated">
     <button mat-icon-button class="example-icon" aria-label="open" (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>

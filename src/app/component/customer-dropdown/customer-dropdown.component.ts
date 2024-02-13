@@ -4,6 +4,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { ICustomer } from '../../model/customer';
 import { SharedDataService } from '../../services/shared-data-service.service';
+import { IUser } from 'src/app/model/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-dropdown',
@@ -12,7 +14,7 @@ import { SharedDataService } from '../../services/shared-data-service.service';
 })
 export class CustomerDropdownComponent {
 
-  constructor(private customerService: CustomerService, private sharedDataService: SharedDataService) {
+  constructor(private customerService: CustomerService, private sharedDataService: SharedDataService, private router: Router,) {
     this.sharedDataService.variable$.subscribe(value => {
       value;
       if (value === 'reload') {
@@ -20,11 +22,27 @@ export class CustomerDropdownComponent {
       }
     });
   }
-
+  username: string | null | undefined;
   customers!: Array<ICustomer>;
   customerName: String | null = "Seleziona il Cliente";
   private subs = new Subscription();
   ngOnInit() {
+
+    let json = localStorage.getItem("login");
+    let user: IUser = {
+      id: null,
+      name: "",
+      surname: null,
+      username: null,
+      password: null,
+      logged: false,
+      jwt: null,
+      rules: undefined
+    };
+    if (json) {
+      user = JSON.parse(json)
+    }
+    this.username = user.name + " " + user.surname;
     var customerLocalStorage = window.sessionStorage.getItem("customer");
     if (customerLocalStorage) {
       var customerObj = JSON.parse(customerLocalStorage);
@@ -32,6 +50,7 @@ export class CustomerDropdownComponent {
       this.sharedDataService.updateVariable(customerObj);
     }
     this.findAll();
+
   }
   changeCustomer(customer: ICustomer) {
     var customerLocalStorage = window.sessionStorage.getItem("customer");
@@ -55,6 +74,11 @@ export class CustomerDropdownComponent {
 
 
 
+  }
+  logout() {
+    localStorage.clear();
+    sessionStorage.clear();
+    location.reload();
   }
   findAll() {
     this.customerService.getCustomer()

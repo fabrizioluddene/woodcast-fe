@@ -26,6 +26,7 @@ import { DashboardBatchRegistryComponent } from './component/batch-registry/dash
 import { SpinnerInterceptor } from './interceptor/spinner.interceptor';
 import { SpinnerComponent } from './component/spinner/spinner.component';
 import { LoginComponent } from './auth/login/login.component';
+import { AuthGuard } from './auth/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,4 +62,7 @@ import { LoginComponent } from './auth/login/login.component';
   }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  
+  
+ }

@@ -31,8 +31,8 @@ export class ResourcesRegistryServiceService {
     const URL = this.baseURL + '/save';
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': 'my-auth-token'
+        'Content-Type':  'application/json'
+        
       })
     };
     console.log(URL)
