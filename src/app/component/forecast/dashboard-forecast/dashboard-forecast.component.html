@@ -1,1 +1,15 @@
-<p>dashboard-forecast works!</p>
+<div class="panel">
+    <div class="panel-body">
+        <h1 class="page-title"><span style="display: flex;line-height: 25px;">
+            <mat-icon mat-list-icon>forest</mat-icon>&nbsp;&nbsp;&nbsp;
+            <span>Forecast</span>
+        </span>
+    </h1>
+    
+        <div id="chart">
+            <apx-chart [series]="chartOptions.series!" [chart]="chartOptions.chart!" [yaxis]="chartOptions.yaxis!"
+                [xaxis]="chartOptions.xaxis!" [labels]="chartOptions.labels!" [stroke]="chartOptions.stroke!"
+                [markers]="chartOptions.markers!" [fill]="chartOptions.fill!"></apx-chart>
+        </div>
+    </div>
+</div>

@@ -27,6 +27,7 @@ import { SpinnerInterceptor } from './interceptor/spinner.interceptor';
 import { SpinnerComponent } from './component/spinner/spinner.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './auth/auth.guard';
+import { NgApexchartsModule } from 'ng-apexcharts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +54,7 @@ import { AuthGuard } from './auth/auth.guard';
     HttpClientModule,
     FormsModule, ReactiveFormsModule,
     HttpClientModule,
+    NgApexchartsModule,
 
   ],
   providers: [{
