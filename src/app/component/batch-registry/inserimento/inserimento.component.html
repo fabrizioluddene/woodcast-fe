@@ -1,9 +1,10 @@
-<h1 class="page-title flex-display inserimento-modal-title"><span class=" flex-display "><mat-icon>extension</mat-icon> Inserisci Commessa</span></h1>
+<h1 class="page-title flex-display inserimento-modal-title"><span class=" flex-display "><mat-icon>extension</mat-icon>
+        Inserisci Commessa</span></h1>
 <form [formGroup]="form" (ngSubmit)="sub()">
     <div mat-dialog-content>
-       
 
-        
+        retert
+
         <mat-form-field>
             <mat-label>Commessa</mat-label>
             <input matInput placeholder="inserisci un valore" #input formControlName="order">
@@ -14,8 +15,14 @@
         </mat-form-field>
         <mat-form-field>
             <mat-label>Program Manager</mat-label>
-            <input matInput placeholder="inserisci un valore" #input formControlName="pm">
+            <mat-select formControlName="pm">
+              
+                <span *ngFor="let program of programManager; let i = index">
+                    <mat-option value="{{program.id}}">{{program.name}}</mat-option>
+                </span>
+            </mat-select>
         </mat-form-field>
+        
         <mat-form-field>
             <mat-label>Tipo Commessa</mat-label>
             <mat-select formControlName="orderType">
@@ -23,7 +30,7 @@
                 <mat-option value="A">Altro</mat-option>
             </mat-select>
         </mat-form-field>
-        
+
         <mat-form-field>
             <mat-label>Stato Lotto</mat-label>
             <mat-select formControlName="orderStatus">
@@ -47,7 +54,7 @@
             <input matInput placeholder="inserisci un valore" #input formControlName="expectedMargin">
         </mat-form-field>
 
-        
+
         <mat-form-field>
             <mat-label>Plafond GG ricavo</mat-label>
             <input matInput placeholder="inserisci un valore" #input formControlName="proceedsDayPlafond">

@@ -38,4 +38,9 @@ export class BatchRegistryService {
     console.log(URL)
     return this.http.delete<any>(URL, httpOptions);
   }
+
+  getAllProgramManager(): Observable<any[]>{
+    const URL = this.baseURL+'/user/rule/PROGRAM_MANAGER'
+    return this.http.get<any[]>(URL);
+  }
 }

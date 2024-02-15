@@ -81,6 +81,26 @@ export class InserimentoComponent {
 
     });
   }
+  programManager: any[] = [];
+  ngOnInit() {
+    let jsonString = localStorage.getItem("login");
+
+    if (jsonString) {
+      let user = JSON.parse(jsonString);
+      if (user.rules.includes("PRACTICE_LEADER")) {
+        this.batchRegistryService.getAllProgramManager().subscribe(value=>{
+          value.forEach(r=>{
+            this.programManager.push({id:r.id,name:r.name +" "+r.surname});
+          })
+        });
+      } else {
+        this.programManager=[{id:user.id,name:user.name +" "+user.surname}]
+      }
+    }
+
+
+
+  }
 
 
   sub() {
@@ -113,14 +133,8 @@ export class InserimentoComponent {
       this.batchRegistryModel.pm = this.form.controls['pm'].value;
       this.batchRegistryModel.orderType = this.form.controls['orderType'].value;
       this.batchRegistryModel.orderStatus = this.form.controls['orderStatus'].value;
-
       this.batchRegistryModel.note = this.form.controls['note'].value;
-
-
-
-
       this.batchRegistryService.save(this.batchRegistryModel).subscribe(result => {
-        console.log(result);
 
 
       })
