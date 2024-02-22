@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { AuthGuard } from './auth/auth.guard';
-import { IUser } from './model/user';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { MSAL_GUARD_CONFIG, MsalBroadcastService, MsalGuardConfiguration, MsalService } from '@azure/msal-angular';
+import { Subject, filter, takeUntil } from 'rxjs';
+import { EventMessage, EventType, InteractionStatus, RedirectRequest } from '@azure/msal-browser';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,20 +10,32 @@ import { IUser } from './model/user';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'woodcast';
+  isIframe = false;
+  loginDisplay = false;
   push: any;
+  private readonly _destroying$ = new Subject<void>();
 
 
-  isAuthenticated: any;
- 
+  constructor(
+    private router: Router,
 
-  constructor(private authGuard: AuthGuard) {
-
-  }
+  ) { }
 
   ngOnInit() {
-    this.isAuthenticated = this.authGuard.canActivate();
+    let json = localStorage.getItem("login");
+    if (!json) {
+      this.router.navigate(['auth/sso']);
+    }
+
   }
 
+
+
+
+  ngOnDestroy(): void {
+    this._destroying$.next(undefined);
+    this._destroying$.complete();
+  }
 }

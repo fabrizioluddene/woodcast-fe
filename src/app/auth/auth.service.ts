@@ -34,7 +34,18 @@ export class AuthService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        
+
+      })
+    };
+    console.log(URL)
+    return this.http.post<IUser>(URL, varia, httpOptions);
+  }
+  insertUser(varia: IUser) {
+    const URL = this.baseURL + '/user/save';
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+
       })
     };
     console.log(URL)

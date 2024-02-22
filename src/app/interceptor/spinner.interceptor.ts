@@ -6,7 +6,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable, finalize } from 'rxjs';
-import { SpinnerService } from '../service/spinner.service';
+import { SpinnerService } from '../services/spinner.service';
 import { IUser } from '../model/user';
 
 @Injectable()
@@ -35,7 +35,7 @@ export class SpinnerInterceptor implements HttpInterceptor {
     if (token) {
       request = request.clone({
         setHeaders: {
-          Authorization: token
+          "user-info-jwt": token
         }
       });
     }

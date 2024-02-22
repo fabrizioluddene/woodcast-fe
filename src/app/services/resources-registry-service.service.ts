@@ -3,6 +3,7 @@ import { Observable, catchError } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { IResourceRegistry } from "../model/resource-registry"
 import { IResourceParam } from '../model/resource-param';
+import { IResourceAllocation } from '../model/resource-allocation';
 @Injectable({
   providedIn: 'root'
 })
@@ -37,5 +38,17 @@ export class ResourcesRegistryServiceService {
     };
     console.log(URL)
     return this.http.post<any>(URL, varia,httpOptions);
+  }
+
+  getResourceAllocation():Observable<IResourceAllocation[]> {
+    const URL = this.baseURL + '/allocation';
+    console.log(URL)
+    return this.http.get<IResourceAllocation[]>(URL);
+  }
+
+  findByMonthAndResouceId(resourceId:any,month:any):Observable<any[]> {
+    const URL = this.baseURL + '/'+resourceId+'/allocation/month/'+month;
+    console.log(URL)
+    return this.http.get<any[]>(URL);
   }
 }

@@ -80,7 +80,13 @@ export class ForecastGenerateComponent {
 
     }
     if(this.dataTosave.length>0){
-      this.forecastService.create(this.forecastCalendarSave).subscribe();
+      this.forecastService.create(this.forecastCalendarSave).subscribe(res=>{
+        this.dataTosave=new Array();
+        this._snackBar.open('Forecast generato con successo', 'grazie', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      });
       this._snackBar.open('Forecast generato con successo', 'grazie', {
         horizontalPosition: 'center',
         verticalPosition: 'top',

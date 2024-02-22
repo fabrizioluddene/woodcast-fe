@@ -1,12 +1,12 @@
-
-<button class="customer-dropdown-botto" mat-button [matMenuTriggerFor]="menu">
-    <mat-icon>pets</mat-icon> {{customerName}}
-</button>
-<mat-menu #menu="matMenu">
-    <span *ngFor="let customer of customers; let i = index">
-        <button mat-menu-item (click)="changeCustomer(customer)">{{customer.customerName}}</button>
-    </span>
-</mat-menu> | &nbsp;
-<button class="customer-dropdown-botto" mat-button (click)="logout()">
-    <mat-icon>logout</mat-icon> {{username}}
-</button>
+<div style="display: flex;line-height: 25px; vertical-align: middle;align-items: center;">
+    <button class="customer-dropdown-botto" mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>pets</mat-icon> {{customerName}}
+    </button>
+    <mat-menu #menu="matMenu">
+        <span *ngFor="let customer of customers; let i = index">
+            <button mat-menu-item (click)="changeCustomer(customer)">{{customer.customerName}}</button>
+        </span>
+    </mat-menu> 
+    <app-prifile></app-prifile>
+   
+</div>

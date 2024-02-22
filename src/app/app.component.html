@@ -1,7 +1,5 @@
 <mat-drawer-container class="example-container" autosize>
-
-
-  <mat-toolbar *ngIf="isAuthenticated">
+  <mat-toolbar >
     <button mat-icon-button class="example-icon" aria-label="open" (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
@@ -12,6 +10,7 @@
     <span class="spacer"></span>
     <span class="example-spacer"></span>
     <app-customer-dropdown></app-customer-dropdown>
+    
   </mat-toolbar>
   <mat-drawer [mode]="push" #drawer class="example-sidenav" mode="side" style="position: fixed; ">
     <h3>
@@ -63,6 +62,18 @@
         </span>
 
       </mat-list-item>
+
+      <mat-list-item role="listitem" style="margin-bottom: 10px;" routerLink="anagrafica-risorsa/balances"
+        (click)="drawer.close()">
+
+        <span style="display: flex;">
+          <mat-icon mat-list-icon>how_to_reg</mat-icon>&nbsp;&nbsp;&nbsp;
+          <span>Allocazione Risorse</span>
+        </span>
+
+      </mat-list-item>
+
+      
     </mat-list>
     <mat-divider style="margin-bottom: 16px;"></mat-divider>
     <h3>
@@ -80,18 +91,13 @@
           <span>Clienti</span>
         </span>
       </mat-list-item>
-      <mat-list-item role="listitem" style="margin-bottom: 10px;" routerLink="customer-service"
-        (click)="drawer.close()">
-        <span style="display: flex;">
-          <mat-icon mat-list-icon>home_repair_service</mat-icon>&nbsp;&nbsp;&nbsp;
-          <span>Servizi</span>
-        </span>
-      </mat-list-item>
+      
     </mat-list>
 
 
 
   </mat-drawer>
+
   <app-spinner></app-spinner>
   <div class="container">
 
@@ -99,3 +105,4 @@
 
   </div>
 </mat-drawer-container>
+

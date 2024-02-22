@@ -1,0 +1,196 @@
+<h1 class="page-title"><span style="display: flex;line-height: 25px;">
+    <mat-icon mat-list-icon>home</mat-icon>&nbsp;&nbsp;&nbsp;
+        <span style="cursor: pointer;" routerLink="/">Dashboard</span>&nbsp; &gt; &nbsp;
+    <mat-icon mat-list-icon>how_to_reg</mat-icon>&nbsp;&nbsp;&nbsp;
+    <span>Allocazione Risorse</span>
+  </span>
+</h1>
+<mat-form-field>
+    <mat-label>Ricerca</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="inserisci un valore" #input>
+</mat-form-field>
+<div class="mat-elevation-z1 forecast-table" style="overflow: auto;">
+    <table mat-table [dataSource]="dataSource" matSort  matSortActive="resourceName" matSortDisableClear matSortDirection="asc">
+
+
+        
+
+       
+        
+          
+        
+          <!-- Colonna Resource Name -->
+          <ng-container matColumnDef="resourceName" >
+            <th mat-header-cell *matHeaderCellDef style="white-space: nowrap;">Resource Name</th>
+            <td mat-cell *matCellDef="let element" style="white-space: nowrap;">{{ element.resourceName }}</td>
+          </ng-container>
+    
+        <!-- Definizione delle colonne per i mesi e i rispettivi giorni lavorabili e stop -->
+        <ng-container matColumnDef="january">
+          <th mat-header-cell *matHeaderCellDef>GG FORE.</th>
+          <td mat-cell *matCellDef="let element"><a  matTooltip="Apri Riepilogo" class="open-resource-dialog"  (click)="openDialog(1,element)" href="javascript:void(0)" >{{ element.january }}</a></td>
+        </ng-container>
+        <ng-container matColumnDef="januaryWorkableDays">
+          <th mat-header-cell *matHeaderCellDef>GG MESE</th>
+          <td mat-cell *matCellDef="let element">{{ element.januaryWorkableDays }}</td>
+        </ng-container>
+        <ng-container matColumnDef="deltaJanuary">
+          <th mat-header-cell *matHeaderCellDef>GG DELTA</th>
+          <td mat-cell *matCellDef="let element" [ngClass]="getColorClass( element.stopLJanuary)">{{ element.januaryWorkableDays-element.january }}</td>
+        </ng-container>
+      
+        <ng-container matColumnDef="february">
+          <th mat-header-cell *matHeaderCellDef>GG FORE.</th>
+          <td mat-cell *matCellDef="let element"><a matTooltip="Apri Riepilogo" class="open-resource-dialog"  (click)="openDialog(1,element)" href="javascript:void(0)" >{{ element.february }}</a></td>
+        </ng-container>
+        <ng-container matColumnDef="februaryWorkableDays">
+          <th mat-header-cell *matHeaderCellDef>GG MESE</th>
+          <td mat-cell *matCellDef="let element">{{ element.februaryWorkableDays }}</td>
+        </ng-container>
+        <ng-container matColumnDef="deltaFebruary">
+          <th mat-header-cell *matHeaderCellDef>GG DELTA</th>
+          <td mat-cell *matCellDef="let element" [ngClass]="getColorClass( element.stopLFebruary)">{{ element.februaryWorkableDays-element.february }}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="march">
+            <th mat-header-cell *matHeaderCellDef>GG FORE.</th>
+            <td mat-cell *matCellDef="let element"><a matTooltip="Apri Riepilogo" class="open-resource-dialog"  (click)="openDialog(1,element)" href="javascript:void(0)" >{{ element.march }}</a></td>
+          </ng-container>
+          <ng-container matColumnDef="marchWorkableDays">
+            <th mat-header-cell *matHeaderCellDef>GG MESE</th>
+            <td mat-cell *matCellDef="let element">{{ element.marchWorkableDays }}</td>
+          </ng-container>
+          <ng-container matColumnDef="deltaMarch">
+            <th mat-header-cell *matHeaderCellDef>GG DELTA</th>
+            <td mat-cell *matCellDef="let element" [ngClass]="getColorClass( element.stopLMarch)">{{ element.marchWorkableDays-element.march }}</td>
+          </ng-container>
+          
+          <ng-container matColumnDef="april">
+            <th mat-header-cell *matHeaderCellDef>GG FORE.</th>
+            <td mat-cell *matCellDef="let element"><a matTooltip="Apri Riepilogo" class="open-resource-dialog"  (click)="openDialog(1,element)" href="javascript:void(0)" >{{ element.april }}</a></td>
+          </ng-container>
+          <ng-container matColumnDef="aprilWorkableDays">
+            <th mat-header-cell *matHeaderCellDef>GG MESE</th>
+            <td mat-cell *matCellDef="let element">{{ element.aprilWorkableDays }}</td>
+          </ng-container>
+          <ng-container matColumnDef="deltaApril">
+            <th mat-header-cell *matHeaderCellDef>GG DELTA</th>
+            <td mat-cell *matCellDef="let element" [ngClass]="getColorClass( element.stopLApril)">{{ element.aprilWorkableDays-element.april }}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="may">
+            <th mat-header-cell *matHeaderCellDef>GG FORE.</th>
+            <td mat-cell *matCellDef="let element"><a matTooltip="Apri Riepilogo" class="open-resource-dialog"  (click)="openDialog(1,element)" href="javascript:void(0)" >{{ element.may }}</a></td>
+          </ng-container>
+          <ng-container matColumnDef="mayWorkableDays">
+            <th mat-header-cell *matHeaderCellDef>GG MESE</th>
+            <td mat-cell *matCellDef="let element">{{ element.mayWorkableDays }}</td>
+          </ng-container>
+          <ng-container matColumnDef="deltaMay">
+            <th mat-header-cell *matHeaderCellDef>GG DELTA</th>
+            <td mat-cell *matCellDef="let element" [ngClass]="getColorClass( element.stopLMay)">{{ element.mayWorkableDays-element.may }}</td>
+          </ng-container>
+          
+          <ng-container matColumnDef="june">
+            <th mat-header-cell *matHeaderCellDef>GG FORE.</th>
+            <td mat-cell *matCellDef="let element"><a matTooltip="Apri Riepilogo" class="open-resource-dialog"  (click)="openDialog(1,element)" href="javascript:void(0)" >{{ element.june }}</a></td>
+          </ng-container>
+          <ng-container matColumnDef="juneWorkableDays">
+            <th mat-header-cell *matHeaderCellDef>GG MESE</th>
+            <td mat-cell *matCellDef="let element" >{{ element.juneWorkableDays }}</td>
+          </ng-container>
+          <ng-container matColumnDef="deltaJune">
+            <th mat-header-cell *matHeaderCellDef>GG DELTA</th>
+            <td mat-cell *matCellDef="let element" [ngClass]="getColorClass( element.stopLJune)">{{ element.juneWorkableDays-element.june }}</td>
+          </ng-container>
+    
+          <ng-container matColumnDef="july">
+            <th mat-header-cell *matHeaderCellDef>GG FORE.</th>
+            <td mat-cell *matCellDef="let element"><a matTooltip="Apri Riepilogo" class="open-resource-dialog"  (click)="openDialog(1,element)" href="javascript:void(0)" >{{ element.july }}</a></td>
+          </ng-container>
+          <ng-container matColumnDef="julyWorkableDays">
+            <th mat-header-cell *matHeaderCellDef>GG MESE</th>
+            <td mat-cell *matCellDef="let element">{{ element.julyWorkableDays }}</td>
+          </ng-container>
+          <ng-container matColumnDef="deltaJuly">
+            <th mat-header-cell *matHeaderCellDef>GG DELTA</th>
+            <td mat-cell *matCellDef="let element" [ngClass]="getColorClass( element.stopLJuly)">{{ element.julyWorkableDays-element.july }}</td>
+          </ng-container>
+          
+          <ng-container matColumnDef="august">
+            <th mat-header-cell *matHeaderCellDef>GG FORE.</th>
+            <td mat-cell *matCellDef="let element"><a matTooltip="Apri Riepilogo" class="open-resource-dialog"  (click)="openDialog(1,element)" href="javascript:void(0)" >{{ element.august }}</a></td>
+          </ng-container>
+          <ng-container matColumnDef="augustWorkableDays">
+            <th mat-header-cell *matHeaderCellDef>GG MESE</th>
+            <td mat-cell *matCellDef="let element">{{ element.augustWorkableDays }}</td>
+          </ng-container>
+          <ng-container matColumnDef="deltaAugust">
+            <th mat-header-cell *matHeaderCellDef>GG DELTA</th>
+            <td mat-cell *matCellDef="let element" [ngClass]="getColorClass( element.stopLAugust)">{{ element.augustWorkableDays-element.august }}</td>
+          </ng-container>
+    
+          <ng-container matColumnDef="september">
+            <th mat-header-cell *matHeaderCellDef>GG FORE.</th>
+            <td mat-cell *matCellDef="let element"><a matTooltip="Apri Riepilogo" class="open-resource-dialog"  (click)="openDialog(1,element)" href="javascript:void(0)" >{{ element.september }}</a></td>
+          </ng-container>
+          <ng-container matColumnDef="septemberWorkableDays">
+            <th mat-header-cell *matHeaderCellDef>GG MESE</th>
+            <td mat-cell *matCellDef="let element">{{ element.septemberWorkableDays }}</td>
+          </ng-container>
+          <ng-container matColumnDef="deltaSeptember">
+            <th mat-header-cell *matHeaderCellDef>GG DELTA</th>
+            <td mat-cell *matCellDef="let element" [ngClass]="getColorClass( element.stopLSeptember)">{{ element.septemberWorkableDays-element.september }}</td>
+          </ng-container>
+          
+          <ng-container matColumnDef="october">
+            <th mat-header-cell *matHeaderCellDef>GG FORE.</th>
+            <td mat-cell *matCellDef="let element"><a matTooltip="Apri Riepilogo" class="open-resource-dialog"  (click)="openDialog(1,element)" href="javascript:void(0)" >{{ element.october }}</a></td>
+          </ng-container>
+          <ng-container matColumnDef="octoberWorkableDays">
+            <th mat-header-cell *matHeaderCellDef>GG MESE</th>
+            <td mat-cell *matCellDef="let element">{{ element.octoberWorkableDays }}</td>
+          </ng-container>
+          <ng-container matColumnDef="deltaOctober">
+            <th mat-header-cell *matHeaderCellDef>GG DELTA</th>
+            <td mat-cell *matCellDef="let element" [ngClass]="getColorClass( element.stopLOctober)">{{ element.octoberWorkableDays-element.october }}</td>
+          </ng-container>
+    
+          <ng-container matColumnDef="november">
+            <th mat-header-cell *matHeaderCellDef>GG FORE.</th>
+            <td mat-cell *matCellDef="let element"><a matTooltip="Apri Riepilogo" class="open-resource-dialog"  (click)="openDialog(1,element)" href="javascript:void(0)" >{{ element.november }}</a></td>
+          </ng-container>
+          <ng-container matColumnDef="novemberWorkableDays">
+            <th mat-header-cell *matHeaderCellDef>GG MESE</th>
+            <td mat-cell *matCellDef="let element">{{ element.novemberWorkableDays }}</td>
+          </ng-container>
+          <ng-container matColumnDef="deltaNovember">
+            <th mat-header-cell *matHeaderCellDef>DELTA GG</th>
+            <td mat-cell *matCellDef="let element" [ngClass]="getColorClass( element.stopLDecember)">{{ element.novemberWorkableDays-element.november }}</td>
+          </ng-container>
+          
+          <ng-container matColumnDef="december">
+            <th mat-header-cell *matHeaderCellDef>GG FORE.</th>
+            <td mat-cell *matCellDef="let element"><a matTooltip="Apri Riepilogo" class="open-resource-dialog"  (click)="openDialog(1,element)" href="javascript:void(0)" >{{ element.december }}</a></td>
+          </ng-container>
+          <ng-container matColumnDef="decemberWorkableDays">
+            <th mat-header-cell *matHeaderCellDef>GG MESE</th>
+            <td mat-cell *matCellDef="let element">{{ element.decemberWorkableDays }}</td>
+          </ng-container>
+          <ng-container matColumnDef="deltaDecember">
+            <th mat-header-cell *matHeaderCellDef>GG DELTA</th>
+            <td mat-cell *matCellDef="let element" [ngClass]="getColorClass( element.stopLDecember)">{{ element.decemberWorkableDays-element.december }}</td>
+          </ng-container>
+
+        <ng-container  *ngFor="let col of displayedColumnsHeader;index as i" [matColumnDef]="col">
+            <th  mat-header-cell *matHeaderCellDef [attr.colspan]="i===0 ? 1 : 3" style="text-align: center; border-right: 1px solid #fff;"> {{col}} </th>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsHeader"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+<mat-paginator [length]="100" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page"></mat-paginator>

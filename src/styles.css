@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-html,
-body {
+
+html {
     height: 100%;
 }
 
@@ -32,7 +32,7 @@ body {
 
 .mat-toolbar-row,
 .mat-toolbar-single-row {
-    background-color: #3f51b5 !important;
+   background: linear-gradient(#3f51b5, #001277)!important;
 
     color: #fff !important;
 }
@@ -47,14 +47,17 @@ body {
     border-radius: 5px;
 
 }
-.color-red{
-    background-color: red!important;
+
+.color-red {
+    background-color: rgb(252, 157, 157) !important;
 }
-.color-yellow{
-    background-color: rgb(241, 197, 0)!important;
+
+.color-yellow {
+    background-color: rgb(254, 255, 179) !important;
 }
-.color-green{
-    background-color: green!important;
+
+.color-green {
+    background-color: rgb(144, 245, 181) !important;
 }
 
 .mat-mdc-form-field {
@@ -172,7 +175,7 @@ mat-drawer-container {
     width: 50%;
     float: left;
     padding: 16px;
-   
+
 }
 
 .coll-10 {
@@ -244,18 +247,24 @@ tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row.ng-star-inserted
 
 
 
-.forecast-table .cdk-column-nominative {
+.forecast-table .cdk-column-nominative,
+.forecast-table .cdk-column-resourceName,
+.forecast-table .cdk-column-Info,
+.forecast-table .cdk-column-id {
     position: sticky;
     left: 0;
     z-index: 1;
     /* Assicura che la colonna fissata sia sopra le altre colonne */
-    border-right: 1px solid #ff4081;
+    border-right: 1px solid #ff4081 !important;
+    ;
 }
 
 .forecast-table .mat-mdc-row:hover {
     background-color: #ffe4ed;
 
 }
+
+
 
 .example-card {
     max-width: 400px;
@@ -293,33 +302,77 @@ tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row.ng-star-inserted
 }
 
 /* Creazione delle colonne di varie dimensioni */
-.colu-1 { width: 8.33%; }
-.colu-2 { width: 16.66%; }
-.colu-3 { width: 25%; }
-.colu-4 { width: 33.33%; }
-.colu-5 { width: 41.66%; }
-.colu-6 { width: 50%; }
-.colu-7 { width: 58.33%; }
-.colu-8 { width: 66.66%; }
-.colu-9 { width: 75%; }
-.colu-10 { width: 83.33%; }
-.colu-11 { width: 91.66%; }
-.colu-12 { width: 100%; }
+.colu-1 {
+    width: 8.33%;
+}
 
-.spinner-container{
+.colu-2 {
+    width: 16.66%;
+}
+
+.colu-3 {
+    width: 25%;
+}
+
+.colu-4 {
+    width: 33.33%;
+}
+
+.colu-5 {
+    width: 41.66%;
+}
+
+.colu-6 {
+    width: 50%;
+}
+
+.colu-7 {
+    width: 58.33%;
+}
+
+.colu-8 {
+    width: 66.66%;
+}
+
+.colu-9 {
+    width: 75%;
+}
+
+.colu-10 {
+    width: 83.33%;
+}
+
+.colu-11 {
+    width: 91.66%;
+}
+
+.colu-12 {
+    width: 100%;
+}
+
+.spinner-container {
     width: 100%;
     height: 100%;
-    position:fixed;
+    position: fixed;
     background-color: rgba(255, 255, 255, 0.5);
     z-index: 9999999;
     text-align: center;
 }
-mat-spinner{
-    margin:-50px auto;
+
+mat-spinner {
+    margin: -50px auto;
     top: 50%;
 
 }
 
-.icon-azioni:hover{
+.icon-azioni:hover {
     color: #ff4081;
+}
+
+.open-resource-dialog {
+    color: blue;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
 }

@@ -1,0 +1,10 @@
+<h1 class="page-title inserimento-modal-title"><span class="flex-display"><mat-icon>person</mat-icon>
+        {{data[0].nominative}}</span></h1><br/>
+<div class="row" *ngFor="let col of data;index as i" style="padding: 0 16px 0 30px;width: 600px;">
+ 
+    <div class="column colu-10"><b>{{col.batchRegistryOrder}} - {{col.batchRegistryDescription}}:</b></div>
+    <div class="column colu-2" style="text-align: center;">{{col.days}} GG</div>
+    <mat-divider></mat-divider>
+</div>
+
+<br/>
